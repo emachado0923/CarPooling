@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Alert, Button, Text, Image, TextInput, Dimensions, StyleSheet, ScrollView, FlatList } from "react-native";
-import { Input } from '../../common';
-import Title from '../../../Components/titles/titles';
+import { View, Text, StyleSheet, ScrollView, } from "react-native";
+import { Input, Button } from '../../common';
+import { TitlesTop } from '../../../Components/titles/titlesTop';
 import { connect } from 'react-redux';
 import Card from '../../../Components/cards/card';
 
@@ -24,121 +24,96 @@ class DataPersonal extends Component {
     const { error, loading } = this.state;
     const { errorTextStyle } = styles;
     return (
-      <View style={styles.content} >
-        <Title colorBorder='#E88100' colorBg='#E88100' colorText="#fff" title="FORMULARIO DE REGISTRO" />
+      <View style={styles.contentGeneral} >
+        <TitlesTop title='FORMULARIO DE REGISTRO' txtColor='#FFF' bgColor='#FF8C01' fontSize={22} />
         <Card
           color="#f09209"
-          // flexDirection="row" margin="3%"
           name="DATOS PERSONALES" category=""
-          cantPersons={6} description="Algo breve mientras tanto :)"
+          cantPersons={1}
+          description="Algo breve mientras tanto :)"
           borderRadius={10}
           config={true}
-          estado={this.props.statusPassW ? "Completado" : "Incompleto"}
+          estado={this.props.statusPassW ? "Completo" : "Incompleto"}
+          iconName='user'
+          iconSize={40}
         />
-        <Input
-          label={"Nombre"}
-          value={"this.props.user.id_person.nombre"}
-          style={{ width: '85%', color: 'green' }}
-          editable={false}
-        />
-        <Input
-          label={"Apellido"}
-          value={this.props.user.id_person.apellido}
-          style={{ width: '85%', color: 'green' }}
-          editable={false}
-        />
-        <Input
-          label={"Documento"}
-          value={this.props.user.id_person.documento.toString()}
-          style={{ width: '85%', color: 'green' }}
-          editable={false}
-        />
-        <Input
-          label={"Telefono"}
-          value={this.props.user.id_person.telefono.toString()}
-          style={{ width: '85%', color: 'green' }}
-          editable={false}
-        />
-        <Input
-          label={"E-mail"}
-          value={this.props.user.id_person.email}
-          style={{ width: '85%', color: 'green' }}
-          editable={false}
-        />
-        <Input
-          label={"Ciudad"}
-          value={this.props.user.id_person.ciudad}
-          style={{ width: '85%', color: 'green' }}
-          editable={false}
-        />
-        <Input
-          label={"Fecha_Facimiento"}
-          value={this.props.user.id_person.fecha_nacimiento}
-          style={{ width: '85%', color: 'green' }}
-          editable={false}
-        />
-        <Button
-          title="Cambiar contraseña"
-          onPress={() => this.props.navigation.navigate("ChangePassword")}
-          color='#E88100'
-        />
-        <Text style={errorTextStyle}>
-          {error}
-        </Text>
+        <ScrollView>
+          <View style={styles.contForm}>
+            <Input
+              label={"Nombre"}
+              value={this.props.user.id_person.nombre}
+              editable={false}
+            />
+            <Input
+              label={"Apellido"}
+              value={this.props.user.id_person.apellido}
+              editable={false}
+            />
+            <Input
+              label={"Documento"}
+              value={this.props.user.id_person.documento.toString()}
+              editable={false}
+            />
+            <Input
+              label={"Telefono"}
+              value={this.props.user.id_person.telefono.toString()}
+              editable={false}
+            />
+            <Input
+              label={"E-mail"}
+              value={this.props.user.id_person.email}
+              editable={false}
+            />
+            <Input
+              label={"Ciudad"}
+              value={this.props.user.id_person.ciudad}
+              editable={false}
+            />
+            <Input
+              label={"Fecha_Facimiento"}
+              value={this.props.user.id_person.fecha_nacimiento}
+              editable={false}
+            />
+            <View style={styles.contentBtns}>
+              <Button
+                title="Cambiar contraseña"
+                onPress={() => this.props.navigation.navigate("ChangePassword")}
+                bgColor='#00AA37'
+                colorText='#fff'
+                fontSize={16}
+                widthSize={'60%'}
+              />
+              <Text style={errorTextStyle}>
+                {error}
+              </Text>
+              <Button
+                title="Atras"
+                onPress={() => this.props.navigation.goBack()}
+                bgColor='#FF8C01'
+                colorText='#fff'
+                fontSize={16}
 
-        <Button
-          title="Atras"
-          onPress={() => this.props.navigation.goBack()}
-          color='#E88100'
-        />
+              />
+            </View>
+          </View>
+        </ScrollView>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  content: {
-    flex: 1
-  },
-  grupos: {
-    marginTop: 10,
-    borderWidth: 1,
-    borderBottomRightRadius: 10,
-    borderTopRightRadius: 10,
-    borderColor: "#59b548",
-    backgroundColor: "#59b548",
-    padding: 10,
-    fontSize: 20,
-    maxWidth: 150,
-    width: 150,
-    color: "#fff",
-    marginBottom: 10,
-    textAlign: "center"
-  },
-  misgrupos: {
-    borderWidth: 1,
-    borderBottomRightRadius: 10,
-    borderTopRightRadius: 10,
-    borderColor: "#59b548",
-    backgroundColor: "#fff",
-    padding: 10,
-    fontSize: 20,
-    maxWidth: 150,
-    width: 150,
-    color: "#238276",
-    marginBottom: 10,
-    textAlign: "center"
-  },
-  contentGroups: {
+  contentGeneral: {
     flex: 1,
   },
-  contentMyGroups: {
-    flex: 1
+  contForm: {
+    paddingHorizontal: 16,
+
   },
-  containerStyle: {
-    height: 40,
-    flex: 1,
-    alignItems: 'center'
+  contentBtns: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 16
   },
   errorTextStyle: {
     alignSelf: 'center',

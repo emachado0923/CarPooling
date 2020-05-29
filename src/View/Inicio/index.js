@@ -1,21 +1,12 @@
 import React, { Component } from "react";
-import {
-  View,
-  FlatList,
-  SafeAreaView,
-  Text,
-  ActivityIndicator,
-  StyleSheet,
-  ScrollView,
-  Image
-} from "react-native";
+import {View,Text,ScrollView} from "react-native";
 
 //responsive
 import { Grid, Col, Row } from "react-native-easy-grid";
 
 //Componentes
-import Titles from "../../../Components/titles/titles";
-import Card from "../../../Components/cards/card";
+import Titles from "../../Components/titles/titles";
+import Card from "../../Components/cards/card";
 
 export default class Inicio extends Component {
   constructor() {

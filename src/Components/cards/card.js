@@ -1,12 +1,6 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  FlatList,
-  TouchableHighlight
-} from "react-native";
+import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default class Card extends Component {
   constructor(props) {
@@ -14,12 +8,12 @@ export default class Card extends Component {
 
     this.state = {
       listGrups: {
-        width:  this.props.config?"100%":"90%",
-        maxWidht: this.props.config?"100%":"90%",
-        borderWidth: !this.props.config?1:null,
+        width: this.props.config ? "100%" : "90%",
+        maxWidht: this.props.config ? "100%" : "90%",
+        borderWidth: !this.props.config ? 1 : null,
         borderRadius: 16,
-        borderColor: !this.props.config?this.props.color:null,
-        backgroundColor: !this.props.config?"white":null,
+        borderColor: !this.props.config ? this.props.color : null,
+        backgroundColor: !this.props.config ? "white" : null,
         flexDirection: "row",
         marginBottom: 10,
         alignSelf: "center",
@@ -28,7 +22,7 @@ export default class Card extends Component {
         alignItems: "center",
         position: "relative",
         shadowColor: "black",
-        elevation: this.props.config?0:4,
+        elevation: this.props.config ? 0 : 4,
       },
       foto: {
         borderWidth: 1,
@@ -36,7 +30,9 @@ export default class Card extends Component {
         borderRadius: this.props.borderRadius || 100,
         width: this.props.cantPersons ? 70 : 90,
         height: this.props.cantPersons ? 70 : 90,
-        marginRight: 20
+        marginRight: 20, 
+        justifyContent:'center',
+        alignItems:'center',
       },
       nombreGrupo: {
         textTransform: "uppercase",
@@ -52,79 +48,81 @@ export default class Card extends Component {
       direction: {
         flexDirection: this.props.flexDirection,
         alignItems: this.props.flexDirection ? "flex-end" : "flex-start",
-        justifyContent: 'flex-start', 
+        justifyContent: 'flex-start',
         maxWidth: '90%'
       },
       onPress: this.props.onPress,
       container: {
-        display: 'flex', 
+        display: 'flex',
         flexDirection: 'row',
         minWidth: '100%',
         maxWidth: '100%',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        marginVertical: this.props.flexDirection?10 : 5,
+        marginVertical: this.props.flexDirection ? 10 : 5,
         paddingHorizontal: 20
       },
-      estado:{
-        color: this.props.estado == "Completado"?"green":"red",
+      estado: {
+        color: this.props.estado == "Completo" ? "green" : "red",
       }
     };
   }
-  
-  componentWillMount(){
-    let {estado} = this.state;
-    estado.color = this.props.estado == "Completado"?"green":"red";
-    this.setState({estado})
+
+  componentWillMount() {
+    let { estado } = this.state;
+    estado.color = this.props.estado == "Completo" ? "green" : "red";
+    this.setState({ estado })
   }
 
   render() {
     let estado = {
-      color : this.props.estado == "Completado"?"green":"red"
+      color: this.props.estado == "Completo" ? "green" : "red"
     }
     return (
       <View style={this.state.listGrups}>
 
         <TouchableHighlight onPress={this.state.onPress} underlayColor="rgba(0,0,0,0.1)">
           <View style={this.state.container}>
-            
-            <View style={this.state.foto}/>
+
+            <View style={this.state.foto}>
+              <Icon name={this.props.iconName} size={this.props.iconSize} color='#00AA37' />
+            </View>
 
             {
-              this.props.config ? 
-              <View style={styles.headGrupo}>
-              <View style={this.state.direction}>
-                <Text style={this.state.nombreGrupo}>{this.props.name}</Text>
-              </View>
-                <Text style={styles.description} numberOfLines={3}>
-                  {this.props.description}
-                </Text>
-                <Text style={estado}>
-                  * {this.props.estado}
-                </Text>
+              this.props.config ?
+                <View style={styles.headGrupo}>
+                  <View style={this.state.direction}>
+                    <Text style={this.state.nombreGrupo}>{this.props.name}</Text>
+                  </View>
+                  <Text style={styles.description} numberOfLines={3}>
+                    {this.props.description}
+                  </Text>
+                  <Text style={estado}>
+                    <Icon name='circle' solid/> {this.props.estado}
+                  </Text>
 
-            </View>
-              :
-            <View style={styles.headGrupo}>
-              <View style={this.state.direction}>
-                <Text style={this.state.nombreGrupo}>{this.props.name}</Text>
-                <Text style={this.state.categoriaGrupo}>
-                  {this.props.category}
-                </Text>
-              </View>
+                </View>
+                :
+                <View style={styles.headGrupo}>
+                  <View style={this.state.direction}>
+                    <Text style={this.state.nombreGrupo}>{this.props.name}</Text>
+                    <Text style={this.state.categoriaGrupo}>
+                      {this.props.category}
+                    </Text>
+                  </View>
 
-              {this.props.cantPersons === undefined ? (
-                <Text style={styles.description} numberOfLines={3}>
-                  {this.props.description}
-                </Text>
-              ) : (
-                <Text style={this.state.cantidadP}>
-                  Cantidad de personas: {this.props.cantPersons}/
-                  {this.props.cantPersons}
-                </Text>
-              )}
+                  {this.props.cantPersons === undefined ? (
+                    <Text style={styles.description} numberOfLines={3}>
+                      {this.props.description}
+                    </Text>
+                  ) : (
+                      <Text style={this.state.cantidadP}>
+                        Cantidad de personas: {this.props.cantPersons}/
+                        {this.props.cantPersons}
+                      </Text>
+                    )}
 
-            </View>
+                </View>
             }
 
           </View>

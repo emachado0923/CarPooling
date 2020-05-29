@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { View, Alert, Text, Image, TextInput, Dimensions, StyleSheet } from "react-native";
+import { View, Alert, Text, Image, TextInput, Dimensions, StyleSheet, ScrollView } from "react-native";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import LottieView from 'lottie-react-native';
-import anim from '../../../../resources/animations/backgraounds/wavesGreen.json'
+import anim from '../../../resources/animations/backgraounds/wavesGreen.json'
 import { connect } from 'react-redux';
-import { jwt, saveKey, user } from '../../../../redux/actions/services';
-import { typeProfile, nextConfig } from '../../../../redux/actions/people';
-import { ButtonSelect } from '../../../../Components/common/ButtonSelect';
+import { jwt, saveKey, user } from '../../../redux/actions/services';
+import { typeProfile, nextConfig } from '../../../redux/actions/people';
+import { ButtonSelect } from '../../../Components/common/ButtonSelect';
+import { TitlesTop } from '../../../Components/titles/titlesTop';
 
 class SelectRol extends Component {
   constructor(props) {
@@ -65,44 +66,44 @@ class SelectRol extends Component {
         <Row>
           <Col size={1}>
             <View style={styles.contaitnerGen}>
-              <Text style={styles.title}>SELECCIONA UN ROL</Text>
+              <TitlesTop
+                title='SELECCIONA UN ROL'
+                txtColor='#00AA37'
+              />
               <View style={styles.contSec1}>
                 <View style={styles.contImg}>
-                  <Image source={require('../../../../resources/img/logoInicio/LogoSENA-naranja_vector.png')} style={styles.imageTop} />
+                  <Image source={require('../../../resources/img/logoInicio/LogoSENA-naranja_vector.png')} style={styles.imageTop} />
                 </View>
                 <View style={styles.contText}>
                   <Text style={styles.text}>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Recusandae, consequuntur. Dolorem dignissimos itaque dolores
-                    facere nemo excepturi facilis ad quos maxime inventore cum nisi,
-                    odit, numquam molestiae.Corporis, quidem molestiae.
+                    Recusandae, consequuntur. Est non fugit atque ea tenetur.
                   </Text>
                 </View>
               </View>
               <View style={styles.btnsCont}>
-                <Row style={styles.button}>
-                  <ButtonSelect
-                    title="Conductor"
-                    sizeIcon= {40}
-                    colorIcon='white'
-                    onPress={() => this.next("CONDUCTOR")}
-                    colorText='white'
-                    bgColor='#E88100'
-                  />
-                </Row>
-                <Row style={styles.button}>
-                  <ButtonSelect
-                    title="Pasajero"
-                    sizeIcon= {40}
-                    colorIcon='white'
-                    onPress={() => this.next("PASAJERO")}
-                    colorText='white'
-                    bgColor='#008000'
-                  />
-                </Row>
+                <ButtonSelect
+                  title="Conductor"
+                  sizeIcon={48}
+                  colorIcon='#fff'
+                  onPress={() => this.next("CONDUCTOR")}
+                  colorText='#fff'
+                  bgColor='#FF8C01'
+                  radiusRight={300}
+                  txtAlign='left'
+                />
+                <ButtonSelect
+                  title="Pasajero"
+                  sizeIcon={48}
+                  colorIcon='#fff'
+                  onPress={() => this.next("PASAJERO")}
+                  colorText='#fff'
+                  bgColor='#00AA37'
+                  radiusLeft={300}
+                  txtAlign='right'
+                />
               </View>
             </View>
-
             <Row>
               <LottieView
                 ref={animation => {
@@ -110,7 +111,7 @@ class SelectRol extends Component {
                 }}
                 style={{
                   width: '100%',
-                  bottom: '-10%',
+                  bottom: -10,
                 }}
                 loop={true}
                 source={anim}
@@ -124,52 +125,42 @@ class SelectRol extends Component {
 }
 const styles = StyleSheet.create({
   contaitnerGen: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    // alignItems: "center",
-    minHeight: "75%",
-    // backgroundColor: 'blue'
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#008000',
-    textAlign: 'left',
-    paddingLeft: 8
+    minHeight: '100%',
+    // backgroundColor: 'pink',
   },
   contSec1: {
-    // backgroundColor: 'pink',
-    display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    // marginBottom: 128,
-    paddingHorizontal: 24
-    // padding: 24,
+    paddingVertical: 36,
+    // backgroundColor: 'blue'
   },
   imageTop: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     resizeMode: 'cover',
-    marginTop: 12,
   },
   contText: {
-    marginTop: 24,
+    paddingVertical: 36,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: '#fff',
+    paddingHorizontal: 12,
+
   },
   text: {
-    fontSize: 16,
-    textAlign: 'justify'
+    fontSize: 20,
+    textAlign: 'center',
+    color:'#4A4C4E'
   },
   btnsCont: {
-    // backgroundColor: 'red',
-    display: 'flex',
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  button: {
-    width: '50%',
-    display: 'flex',
-    justifyContent: 'center'
+    // backgroundColor: 'red',
   },
 });
 

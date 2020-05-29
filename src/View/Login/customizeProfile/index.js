@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavigationConfigIni from '../../../../routes/index';
+import NavigationConfigIni from '../../../routes/index';
 
 export default class CustomizeProfile extends Component {
 

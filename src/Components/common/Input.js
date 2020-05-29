@@ -1,17 +1,24 @@
 import React from 'react';
 import { View, TextInput, Text } from 'react-native';
 
-export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, multiline, numberOfLines,editable,borderBottomColor }) => {
-  const { labelStyle, containerStyle } = styles;
+export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, numberOfLines, editable, borderBottomColor, fontInputSize, labelColor, labelSize }) => {
+  const {  containerStyle } = styles;
   // inputStyle.borderBottomColor = borderBottomColor
   let inputStyle = {
-    height: 25,
     width: '100%',
-    borderBottomWidth: 1, 
-    borderBottomColor: borderBottomColor || '#E88100',
+    borderBottomWidth: 2,
+    borderBottomColor: borderBottomColor || '#FF8C01',
     textAlign: 'left',
+    fontSize: fontInputSize || 16  ,
     margin: 0,
     padding: 0
+  }
+  let labelStyle = {
+    color: labelColor || '#000',
+    textAlign: 'left',
+    margin: 0,
+    padding: 2,
+    fontSize: labelSize || 16
   }
   return (
     <View style={containerStyle}>
@@ -22,7 +29,6 @@ export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry
         value={value}
         onChangeText={onChangeText}
         autoCorrect={false}
-        multiline={multiline}
         numberOfLines={numberOfLines}
         style={inputStyle}
         editable={editable}
@@ -32,22 +38,8 @@ export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry
 };
 
 const styles = {
-  labelStyle: {
-    color: 'black',
-    textAlign: 'left',
-    margin: 0,
-    padding: 2
-  },
-  inputStyle: {
-    height: 25,
-    width: '100%',
-    borderBottomWidth: 1, 
-    borderBottomColor: '#E88100',
-    textAlign: 'left',
-    margin: 0,
-    padding: 0
-  },
-  containerStyle:{
-    minWidth: '75%'
+  containerStyle: {
+    minWidth: '80%',
+    marginVertical: 12
   }
 };

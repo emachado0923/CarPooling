@@ -1,24 +1,15 @@
 import React, { Component } from "react";
-import {
-  View,
-  Alert,
-  Text,
-  Image,
-  TextInput,
-  Dimensions,
-  Keyboard,
-  Animated
-} from "react-native";
+import { View, Alert, Text, Image, Dimensions, Keyboard, Animated } from "react-native";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import LottieView from "lottie-react-native";
-import anim from "../../../resources/animations/backgraounds/wavesGreen.json";
-import { Loading, Input,Button } from "../../../Components/common";
+import anim from "../../resources/animations/backgraounds/wavesGreen.json";
+import { Loading, Input, Button } from "../../Components/common";
 
-import { API, URL_API } from "../../../API/comunicacionApi";
+import { API, URL_API } from "../../API/comunicacionApi";
 import { connect } from "react-redux";
-import { jwt, saveKey, user } from "../../../redux/actions/services";
-import { KeyboardAvoidingView } from "react-native";
+import { jwt, saveKey, user, cargando } from "../../redux/actions/services";
 import { PanGestureHandler } from "react-native-gesture-handler";
+
 
 var _touchX = new Animated.Value(10 / 2);
 var _touchY = new Animated.Value(10 / 2);
@@ -28,13 +19,13 @@ class Auth extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
+      correo: "",
+      contraseña: "",
       error: "",
       loading: false,
       prueba: false,
       windowWidth: 0,
-      windowHeight:0,
+      windowHeight: 0,
       ola: 0,
       keyboard: false
     };
@@ -67,17 +58,19 @@ class Auth extends Component {
     this.keyboardDidHideListener.remove();
   }
 
-  loginUser() {
-    const { email, password } = this.state;
+  async loginUser() {
+    const { correo, contraseña } = this.state;
     this.setState({ error: "", loading: true });
     // NOTE Post to HTTPS only in production
-    API.POST(`${URL_API}/auth/login`, { email, password })
+    this.props.services_loading(true);
+    await API.POST(`/login`, { correo, contraseña })
       .then(({ data }) => {
+        console.log('Esta es data------>', data)
         if (data.ok) {
           console.log("se loguio ", data);
-          this.props.saveJWT("id_token", data.accessToken);
-          this.props.actualizar_jwt(data.accessToken);
-          this.props.update_user(data.user);
+          this.props.saveJWT("token", data.token);
+          this.props.actualizar_jwt(data.token);
+          this.props.update_user(data.login[0]);
         } else {
           this.setState({ loading: false });
           this.setState({
@@ -91,9 +84,10 @@ class Auth extends Component {
           error: "Error en la conexión"
         });
       });
+    this.props.services_loading(false);
   }
 
-  desacerError(){
+  desacerError() {
     setTimeout(() => {
       this.setState({
         error: ''
@@ -107,45 +101,45 @@ class Auth extends Component {
       loading: false
     });
   }
-handle(){
-  let windowHeight = Dimensions.get("window").height;
-  // console.log("Entra");
-  console.log(_touchY._value);
-  let deviceHeight = -(windowHeight/2) 
-  // console.log(-(windowHeight/2));
-  if (deviceHeight >= _touchY._value) {
-    console.log("Mayor",);
-    this.setState({ 
-      ola: -windowHeight/4*3,
-    });
+  handle() {
+    let windowHeight = Dimensions.get("window").height;
+    // console.log("Entra");
+    console.log(_touchY._value);
+    let deviceHeight = -(windowHeight / 2)
+    // console.log(-(windowHeight/2));
+    if (deviceHeight >= _touchY._value) {
+      console.log("Mayor");
+      this.setState({
+        ola: -windowHeight / 4 * 3,
+      });
 
 
-    
-  }else{
-    this.setState({ 
-      ola: 0,
-    });
+
+    } else {
+      this.setState({
+        ola: 0,
+      });
+    }
+
   }
-  
-}
 
   _onPanGestureEvent = Animated.event(
-    
-    [{nativeEvent: {y: _touchY}}],
-    {listener: this.handle.bind(this)},
+
+    [{ nativeEvent: { y: _touchY } }],
+    { listener: this.handle.bind(this) },
   )
-  presss(){
+  presss() {
     console.log("presiona");
-    
+
   }
 
   render() {
-    const { email, password, error, loading, keyboard, ola } = this.state;
-    console.log("123123",ola);
-    
+    const { correo, contraseña, error, loading, keyboard, ola } = this.state;
+    console.log("123123", ola);
+
     const { errorTextStyle, containerStyle } = styles;
     const imageHeight1 = { width: 100, height: 100, resizeMode: "cover" };
-    const imageHeight2 = { width: 200, height: 200, resizeMode: "cover" };
+    const imageHeight2 = { width: 150, height: 150, resizeMode: "cover" };
 
     return (
       <Grid>
@@ -156,45 +150,56 @@ handle(){
                 display: "flex",
                 justifyContent: "space-around",
                 alignItems: "center",
-                minHeight: "75%"
+                minHeight: "75%",
+                paddingTop: 20
               }}
             >
               <View>
                 <Image
-                  source={require("../../../resources/img/logoInicio/LogoSENA-naranja_vector.png")}
+                  source={require("../../resources/img/logoInicio/LogoSENA-naranja_vector.png")}
                   style={keyboard ? imageHeight1 : imageHeight2}
                 />
               </View>
               <View>
                 <Input
                   label={"Correo Electrónico"}
-                  onChangeText={email => this.setState({ email })}
+                  onChangeText={correo => this.setState({ correo })}
                   placeholder="Ingrese su correo @misena.edu.co"
                   style={{ width: "85%", color: "green" }}
                 />
                 <Input
                   label={"Contraseña"}
                   secureTextEntry
-                  onChangeText={password => this.setState({ password })}
+                  onChangeText={contraseña => this.setState({ contraseña })}
                   placeholder="Ingrese su contraseña"
                 />
                 <Text style={errorTextStyle}>{error}</Text>
 
-                {!loading ? (
-                  <View style={{
-                    alignItems: "center"
-                  }}>
+                <View style={{
+                  minHeight: 80,
+                  alignItems: "center",
+                  justifyContent: 'space-between'
+                }}>
+                  {!loading ? (
 
                     <Button
                       title="Ingresar"
                       onPress={this.loginUser}
                       colorText='#fff'
-                      bgColor="#E88100"
+                      bgColor="#FF8C01"
+                      fontSize={16}
                     />
-                  </View>
-                ) : (
-                  <Loading size={"large"} />
-                )}
+                  ) : (
+                      <Loading size={"large"} />
+                    )}
+                  <Button
+                    title="Registrarse"
+                    onPress={() => this.props.navigation.navigate("Register")}
+                    bgColor='#00AA37'
+                    colorText='#fff'
+                    fontSize={16}
+                  />
+                </View>
               </View>
             </View>
 
@@ -203,30 +208,30 @@ handle(){
               >
                 <Animated.View
                   style={{
-                    flex:1,
+                    flex: 1,
                   }}
                 >
-                  
+
                   <Animated.View
                     style={[{
-                      zIndex:1000,
+                      zIndex: 1000,
                     },
-                      {
-                        transform: [
-                          {
-                            translateX: Animated.add(
-                              _touchX,
-                              new Animated.Value(0)
-                            )
-                          },
-                          {
-                            translateY: Animated.add(
-                              ola || _touchY,
-                              new Animated.Value(0)
-                            )
-                          }
-                        ]
-                      }
+                    {
+                      transform: [
+                        {
+                          translateX: Animated.add(
+                            _touchX,
+                            new Animated.Value(0)
+                          )
+                        },
+                        {
+                          translateY: Animated.add(
+                            ola || _touchY,
+                            new Animated.Value(0)
+                          )
+                        }
+                      ]
+                    }
                     ]}
                   >
 
@@ -235,13 +240,13 @@ handle(){
                         this.animation = animation
                       }}
                       style={{
-                        width:'100%',
+                        width: '100%',
                       }}
                       loop={true}
                       source={anim}
                     />
                   </Animated.View>
-                  
+
                 </Animated.View>
               </PanGestureHandler>
             </Row>
@@ -251,7 +256,7 @@ handle(){
     );
   }
 
-  
+
 }
 
 const styles = {
@@ -277,11 +282,10 @@ const mapDispatchToProps = dispatch => {
   return {
     actualizar_jwt: est => dispatch(jwt(est)),
     saveJWT: (key, value) => dispatch(saveKey(key, value)),
-    update_user: person => dispatch(user(person))
+    update_user: person => dispatch(user(person)),
+    services_loading: loguear => dispatch(cargando(loguear))
+
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

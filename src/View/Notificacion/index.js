@@ -13,9 +13,9 @@ import {
 import { Grid, Col, Row } from "react-native-easy-grid";
 
 //Componentes
-import Notification from "../../../Components/Notification/Notification";
-import Titles from "../../../Components/titles/titles";
-import Card from "../../../Components/cards/card";
+import Notification from "../../Components/Notification/Notification";
+import Titles from "../../Components/titles/titles";
+import Card from "../../Components/cards/card";
 
 export default class Notificaciones extends Component {
   constructor(){

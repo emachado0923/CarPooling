@@ -5,6 +5,8 @@ export const JWT = 'JWT';
 export const CARGANDO = 'CARGANDO';
 export const GET_ERRORSTORE = 'GET_ERRORSTORE';
 export const GET_USER = 'GET_USER';
+export const TO_ROL = 'TO_ROL';
+
 
 export const cargando = stateLoading => ({
     type: CARGANDO,
@@ -36,9 +38,9 @@ export const saveKey = (key, value) => async dispatch => {
 
 export const loadJWT = () => async dispatch => {
     try {
-        const value = await AsyncStorage.getItem('id_token');
+        const value = await AsyncStorage.getItem('token');
         if (value !== null) {
-            await API.AUTH(`${URL_API}/auth/user`,value).then(({data})=>{
+            await API.AUTH(`/validation/token`,value).then(({data})=>{
                 dispatch(jwt(value))
                 dispatch(user(data));
             })
@@ -53,7 +55,7 @@ export const loadJWT = () => async dispatch => {
 
 export const deleteJWT = () => async dispatch => {
     try {
-        await AsyncStorage.removeItem('id_token')
+        await AsyncStorage.removeItem('token')
             .then(
                 () => {
                     dispatch(jwt(''))

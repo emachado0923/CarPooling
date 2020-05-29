@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Alert, Button, Text, Image, TextInput, Dimensions, StyleSheet, ScrollView,} from "react-native";
-import { Input } from '../../common';
+import { View, Alert, Text, Image, TextInput, Dimensions, StyleSheet, ScrollView, } from "react-native";
+import { Input, Button } from '../../common';
 import Title from '../../../Components/titles/titles';
 import { connect } from 'react-redux';
 import Card from '../../../Components/cards/card';
@@ -25,15 +25,18 @@ class DataCenter extends Component {
         const { errorTextStyle } = styles;
         return (
             <View style={styles.content} >
-                <Title colorBorder='#E88100' colorBg='#E88100' colorText="#fff" title="FORMULARIO DE REGISTRO" />
+                <Title colorBorder='#FF8C01' colorBg='#FF8C01' colorText="#fff" title="FORMULARIO DE REGISTRO" />
                 <Card
                     color="#f09209"
                     // flexDirection="row" margin="3%"
                     name="DATOS DEL CENTRO" category=""
-                    cantPersons={6} description="Algo breve mientras tanto bnjjkhjk hjkh jjbhjk  hjkh jkhjkh kj :)"
+                    cantPersons={1}
+                    description="Algo breve mientras tanto bnjjkhjk hjkh jjbhjk  hjkh jkhjkh kj :)"
                     borderRadius={10}
                     config={true}
-                    estado="Completado"
+                    estado="Completo"
+                    iconName='building'
+                    iconSize={40}
                 />
                 <Text>PENDIENTES</Text>
                 {/* 
@@ -82,7 +85,7 @@ class DataCenter extends Component {
         <Button
             title="Cambiar contraseña"
             onPress={()=>this.props.navigation.navigate("ChangePassword")}
-            color='#E88100'
+            color='#FF8C01'
           />
         <Text style={errorTextStyle}>
           {error}
@@ -91,7 +94,10 @@ class DataCenter extends Component {
                 <Button
                     title="Atras"
                     onPress={() => this.props.navigation.goBack()}
-                    color='#E88100'
+                    bgColor='#FF8C01'
+                    bgColor='#FF8C01'
+                    colorText='#fff'
+                    fontSize={16}
                 />
             </View>
         );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Alert, Button, Text, Image, TextInput, Dimensions, StyleSheet,} from "react-native";
-import { Input } from '../../common';
-import Title from '../../../Components/titles/titles';
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { Input, Button } from '../../common';
+import { TitlesTop } from '../../../Components/titles/titlesTop';
 import { connect } from 'react-redux';
 import Card from '../../../Components/cards/card';
 import { statusVehiculo } from '../../../redux/actions/configRegister';
@@ -27,96 +27,77 @@ class DataCar extends Component {
         const { errorTextStyle } = styles;
         return (
             <View style={styles.content} >
-                <Title colorBorder='#E88100' colorBg='#E88100' colorText="#fff" title="FORMULARIO DE REGISTRO" />
+                <TitlesTop title='FORMULARIO DE REGISTRO' txtColor='#FFF' bgColor='#FF8C01' fontSize={22} />
+
                 <Card
                     color="#f09209"
-                    // flexDirection="row" margin="3%"
                     name="DATOS DEL VEHICULO" category=""
-                    cantPersons={4} description="Algo breve mientras tanto :)"
+                    cantPersons={1}
+                    description="Algo breve mientras tanto :)"
                     borderRadius={10}
                     config={true}
-                    estado={this.props.statusVehi ? "Completado" : "Incompleto"}
+                    estado={this.props.statusVehi ? "Completo" : "Incompleto"}
+                    iconName='car'
+                    iconSize={40}
                 />
-                <Input
-                    label={"Marca"}
-                    // style={{ width: '85%', color: 'green' }}
-                    borderBottomColor="green"
-                />
-                <Input
-                    label={"Modelo"}
-                    borderBottomColor="green"
-                />
-                <Input
-                    label={"Tipo vehiculo"}
-                    borderBottomColor="green"
-                />
-                <Input
-                    label={"Placa"}
-                    borderBottomColor="green"
-                />
-                <Button
-                    title="Guardar"
-                    onPress={()=>this.save()}
-                    color='#E88100'
-                />
-                <Text style={errorTextStyle}>
-                    {error}
-                </Text>
+                <ScrollView>
+                    <View style={styles.contForm}>
+                        <Input
+                            label={"Marca"}
+                            borderBottomColor="green"
+                        />
+                        <Input
+                            label={"Modelo"}
+                            borderBottomColor="green"
+                        />
+                        <Input
+                            label={"Tipo vehiculo"}
+                            borderBottomColor="green"
+                        />
+                        <Input
+                            label={"Placa"}
+                            borderBottomColor="green"
+                        />
+                        <View style={styles.contentBtns}>
+                            <Button
+                                title="Guardar"
+                                onPress={() => this.save()}
+                                bgColor='#00AA37'
+                                colorText='#fff'
+                                fontSize={16}
+                            />
+                            <Text style={errorTextStyle}>
+                                {error}
+                            </Text>
 
-                <Button
-                    title="Atras"
-                    onPress={() => this.props.navigation.goBack()}
-                    color='#E88100'
-                />
-            </View>
+                            <Button
+                                title="Atras"
+                                onPress={() => this.props.navigation.goBack()}
+                                bgColor='#FF8C01'
+                                colorText='#fff'
+                                fontSize={16}
+                            />
+                        </View>
+                    </View>
+                </ScrollView>
+            </View >
         );
     }
 }
 
 const styles = StyleSheet.create({
     content: {
-        flex: 1
-    },
-    grupos: {
-        marginTop: 10,
-        borderWidth: 1,
-        borderBottomRightRadius: 10,
-        borderTopRightRadius: 10,
-        borderColor: "#59b548",
-        backgroundColor: "#59b548",
-        padding: 10,
-        fontSize: 20,
-        maxWidth: 150,
-        width: 150,
-        color: "#fff",
-        marginBottom: 10,
-        textAlign: "center"
-    },
-    misgrupos: {
-        borderWidth: 1,
-        borderBottomRightRadius: 10,
-        borderTopRightRadius: 10,
-        borderColor: "#59b548",
-        backgroundColor: "#fff",
-        padding: 10,
-        fontSize: 20,
-        maxWidth: 150,
-        width: 150,
-        color: "#238276",
-        marginBottom: 10,
-        textAlign: "center"
-    },
-    contentGroups: {
         flex: 1,
+        justifyContent: 'space-around'
     },
-    contentMyGroups: {
-        flex: 1
+    contForm: {
+        paddingHorizontal: 16,
     },
-    containerStyle: {
-        height: 40,
-        flex: 1,
-        alignItems: 'center'
+    contentBtns: {
+        alignItems: 'center',
+        marginVertical: 16
     },
+
     errorTextStyle: {
         alignSelf: 'center',
         fontSize: 18,
@@ -136,6 +117,6 @@ const mapDispatchToProps = dispatch => {
     return {
         statusVehicu: statusVehi => dispatch(statusVehiculo(statusVehi))
     }
-  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataCar);

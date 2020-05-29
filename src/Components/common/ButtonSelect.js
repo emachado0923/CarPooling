@@ -1,14 +1,14 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { Ionicons,  } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
-export const ButtonSelect = ({ onPress, title, bgColor, colorText,sizeIcon, colorIcon }) => {
+export const ButtonSelect = ({ onPress, title, bgColor, colorText, sizeIcon, colorIcon, radiusRight, radiusLeft, txtAlign }) => {
   let iconName;
   if (title === 'Conductor') {
-    iconName = `ios-car`;
+    iconName = `car`;
   } else if (title === 'Pasajero') {
-    iconName = `ios-person`;
+    iconName = `male`;
   }
   return (
     <View style={{ flexDirection: "row" }}>
@@ -16,25 +16,28 @@ export const ButtonSelect = ({ onPress, title, bgColor, colorText,sizeIcon, colo
         onPress={onPress}
         style={{
           flex: 1,
-          maxWidth: 180,
-          height: 180,
+          maxWidth: 150,
+          height: 150,
           backgroundColor: bgColor || white,
-          borderRadius: 100,
-          paddingTop: 8,
-          paddingBottom: 8,
+          borderTopLeftRadius: radiusLeft || 0,
+          borderTopRightRadius: radiusRight || 0,
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
+          justifyContent: "flex-end",
+          paddingHorizontal:16,
+          paddingVertical:12
         }}
       >
-        <Ionicons name={iconName} size={sizeIcon} color={colorIcon}/>
+        <Text style={{ textAlign: txtAlign || 'center', paddingHorizontal: 16 }}>
+          <Icon name={iconName} size={sizeIcon} color={colorIcon} />
+        </Text>
         <Text
           style={{
             color: colorText || "black",
             fontSize: 20,
             display: "flex",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            textAlign: txtAlign || 'center'
           }}
         >
           {title}

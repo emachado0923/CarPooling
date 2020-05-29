@@ -103,7 +103,7 @@ class ChangePassword extends Component {
                   <Button
                     title="Guardar"
                     onPress={this.savePassword}
-                    color='#E88100'
+                    color='#FF8C01'
                   />
                   :
                   <Loading size={'large'} />

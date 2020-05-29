@@ -12,7 +12,7 @@ import {
 import { Grid, Col, Row } from "react-native-easy-grid";
 
 //Components
-import Select from '../../../Components/Forms/Select';
+import Select from '../../Components/Forms/Select';
 
 export default class Viajes extends Component {
   render() {

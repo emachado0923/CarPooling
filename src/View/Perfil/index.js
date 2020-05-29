@@ -9,13 +9,13 @@ import {
   ScrollView,
   Label
 } from "react-native";
-import { Button } from "../../../Components/common";
+import { Button } from "../../Components/common";
 import { connect } from "react-redux";
-import { deleteJWT } from "../../../redux/actions/services";
+import { deleteJWT } from "../../redux/actions/services";
 import { Grid, Row, Col } from "react-native-easy-grid";
 
 // Componentes
-import { ButtonMenu } from "../../../Components/common/ButtonMenu";
+import { ButtonMenu } from "../../Components/common/ButtonMenu";
 
 class Perfil extends Component {
   constructor(props) {

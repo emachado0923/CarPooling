@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Loading } from './Components/common';
-import Auth from './View/pages/Login/Auth';
-import Contenedor from './Components/Navegations/Navegation';
 import { connect } from 'react-redux';
 import { loadJWT } from './redux/actions/services';
-import CustomizeProfile from './View/pages/Login/customizeProfile/index'
+import AppNavigation from '../src/routes/index';
 
 class Inicio extends Component {
 
@@ -24,15 +22,15 @@ class Inicio extends Component {
       );
     } else if (!this.props.jwt) {
       return (
-        <Auth />
+        <AppNavigation View='Auth' />
       );
-    } else if(this.props.pass){
-      return <Contenedor />
-    }else if (this.props.jwt) {
-      if(this.props.user.profile == "ninguno"){
-        return <CustomizeProfile />
-      }else{
-        return <Contenedor />
+    } else if (this.props.pass) {
+      return <AppNavigation View='MyTabs' />
+    } else if (this.props.jwt) {
+      if (this.props.user.profile == "ninguno") {
+        return <AppNavigation View='SelectRol' />
+      } else {
+        return <AppNavigation View='MyTabs' />
       }
     }
   }

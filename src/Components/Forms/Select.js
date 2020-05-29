@@ -21,7 +21,7 @@ export default class Select extends Component {
         <Picker
           style={{
             borderBottomWidth: 1, 
-            borderBottomColor: '#E88100',
+            borderBottomColor: '#FF8C01',
             minWidth: "85%",
             maxWidth: "85%",
             padding: 5,
