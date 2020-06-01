@@ -5,10 +5,12 @@ import { TitlesTop } from '../../Components/titles/titlesTop';
 import { Input, Button } from '../../Components/common';
 import { API } from '../../API/comunicacionApi';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Registro } from '../../redux/actions/configRegister';
+import {connect} from 'react-redux'
 // import CustomizeProfile from './customizeProfile/index';
 
 
-export default class Register extends Component {
+class Register extends Component {
     constructor(props) {
         super()
         this.state = {
@@ -17,14 +19,15 @@ export default class Register extends Component {
             correo: '',
             centro: '',
             dirección: '',
-            profile: ''
+            profile: 'ninguno'
         }
     }
 
-    registrarUsuario() {
-        AsyncStorage.setItem(
-            'usuarioRegistro', this.state
-        );
+    async registrarUsuario() {
+        this.props.registrar(this.state)
+
+        this.props.navigation.navigate("SelectRol")
+        // console.log('Mostrar el registro',AsyncStorage.getItem('usuarioRegistro'))
 
     }
 
@@ -93,15 +96,6 @@ export default class Register extends Component {
                                         placeholder='Ingresa tu dirección'
                                         onChangeText={(value) => this.setState({ dirección: value })}
                                     />
-                                    <Input
-                                        labelColor='#00AA37'
-                                        labelSize={20}
-                                        fontInputSize={20}
-                                        label='Rol'
-                                        borderBottomColor='#00AA37'
-                                        placeholder='Ingresa tu dirección'
-                                        onChangeText={(value) => this.setState({ profile: value })}
-                                    />
                                 </View>
                                 <View style={styles.contBtns}>
                                     <Button
@@ -109,7 +103,7 @@ export default class Register extends Component {
                                         bgColor='#FF8C01'
                                         colorText='#fff'
                                         fontSize={20}
-                                        onPress={() => this.props.navigation.navigate('SelectRol')}
+                                        onPress={() => this.registrarUsuario()}
                                     />
                                 </View>
                             </View>
@@ -153,4 +147,19 @@ const styles = StyleSheet.create({
         // backgroundColor: 'blue'
     }
 })
+
+const mapStateToProps = state => {
+    return {
+        jwt: state.services.jwt
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        registrar: est => dispatch(Registro(est)),
+
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
 

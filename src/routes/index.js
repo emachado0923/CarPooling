@@ -8,9 +8,7 @@
 // import ChangePassword from '../Components/Login/changePassword';
 // import Register from '../View/Login/Register';
 // import Auth from '../View/Login/Auth';
-// import AsyncStorage from '@react-native-community/async-storage';
 
-// console.log('algo---->',AsyncStorage.getItem('view'))
 // const AppNavigation = createStackNavigator(
 
 //   {
@@ -95,23 +93,13 @@ function MyTabs() {
         },
       })}
       initialRouteName='Inicio'
-      tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-        labelStyle: {
-          fontSize: 15
-        },
-        style: {
-          height: 55,
-        }
-      }}
-    >
+      tabBarOptions={{activeTintColor: 'tomato', inactiveTintColor: 'gray', labelStyle: {fontSize: 15}, style: {height: 55,}
+      }}>
       <Tab.Screen name='Grupos' component={Grupos} options={{ headerShown: false }} />
       <Tab.Screen name="Inicio" component={Inicio} />
       <Tab.Screen name="Notificaciones" component={Notificaciones} />
       <Tab.Screen name="Viajes" component={Viajes} />
       <Tab.Screen name="Perfil" component={Perfil} />
-
     </Tab.Navigator>
   );
 }

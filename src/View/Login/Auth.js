@@ -65,9 +65,9 @@ class Auth extends Component {
     this.props.services_loading(true);
     await API.POST(`/login`, { correo, contraseña })
       .then(({ data }) => {
-        console.log('Esta es data------>', data)
+        // console.log('Esta es data------>', data)
         if (data.ok) {
-          console.log("se loguio ", data);
+          // console.log("se loguio ", data);
           this.props.saveJWT("token", data.token);
           this.props.actualizar_jwt(data.token);
           this.props.update_user(data.login[0]);

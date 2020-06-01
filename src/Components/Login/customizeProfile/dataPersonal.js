@@ -41,38 +41,44 @@ class DataPersonal extends Component {
           <View style={styles.contForm}>
             <Input
               label={"Nombre"}
-              value={this.props.user.id_person.nombre}
+              value={this.props.user.nombre}
               editable={false}
+              labelColor='#00AA37'
+              labelSize={18}
+              labelWeight='bold'
             />
             <Input
               label={"Apellido"}
-              value={this.props.user.id_person.apellido}
+              value={this.props.user.apellido}
               editable={false}
-            />
-            <Input
-              label={"Documento"}
-              value={this.props.user.id_person.documento.toString()}
-              editable={false}
-            />
-            <Input
-              label={"Telefono"}
-              value={this.props.user.id_person.telefono.toString()}
-              editable={false}
+              labelColor='#00AA37'
+              labelSize={18}
+              labelWeight='bold'
+
             />
             <Input
               label={"E-mail"}
-              value={this.props.user.id_person.email}
+              value={this.props.user.correo}
               editable={false}
+              labelColor='#00AA37'
+              labelSize={18}
+              labelWeight='bold'
+            />
+            <Input
+              label={"Centro"}
+              value={this.props.user.centro}
+              editable={false}
+              labelColor='#00AA37'
+              labelSize={18}
+              labelWeight='bold'
             />
             <Input
               label={"Ciudad"}
-              value={this.props.user.id_person.ciudad}
+              value={this.props.user.dirección}
               editable={false}
-            />
-            <Input
-              label={"Fecha_Facimiento"}
-              value={this.props.user.id_person.fecha_nacimiento}
-              editable={false}
+              labelColor='#00AA37'
+              labelSize={18}
+              labelWeight='bold'
             />
             <View style={styles.contentBtns}>
               <Button

@@ -4,10 +4,11 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import LottieView from 'lottie-react-native';
 import anim from '../../../resources/animations/backgraounds/wavesGreen.json'
 import { connect } from 'react-redux';
-import { jwt, saveKey, user } from '../../../redux/actions/services';
+import { jwt, saveKey, user} from '../../../redux/actions/services';
 import { typeProfile, nextConfig } from '../../../redux/actions/people';
 import { ButtonSelect } from '../../../Components/common/ButtonSelect';
 import { TitlesTop } from '../../../Components/titles/titlesTop';
+import {Registro} from '../../../redux/actions/configRegister'
 
 class SelectRol extends Component {
   constructor(props) {
@@ -29,6 +30,8 @@ class SelectRol extends Component {
     this.setState({
       deviceWidth
     })
+    // console.log('Mostrar el registro', AsyncStorage.getItem('usuarioRegistro'))
+
   }
 
   errores(password1, password2) {
@@ -54,6 +57,9 @@ class SelectRol extends Component {
 
   async next(type) {
     await this.props.typeProfile(type)
+    let data = this.props.registro
+    data.profile = type
+    this.props.registrar(data)
     this.props.navigation.navigate("Forms")
   }
 
@@ -151,7 +157,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    color:'#4A4C4E'
+    color: '#4A4C4E'
   },
   btnsCont: {
     width: '100%',
@@ -168,12 +174,14 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     user: state.services.user,
+    registro : state.configRegister.Registro
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     typeProfile: type => dispatch(typeProfile(type)),
+    registrar: est => dispatch(Registro(est)),
   }
 }
 

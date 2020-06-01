@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { View,  Text, Image, TextInput, Dimensions, StyleSheet, ScrollView, FlatList, AppRegistry } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { connect } from 'react-redux';
 import { user } from '../../../redux/actions/services';
-import { pass } from '../../../redux/actions/configRegister';
+import { pass, Registro } from '../../../redux/actions/configRegister';
 import Card from '../../../Components/cards/card';
 import { Loading, Button } from '../../../Components/common';
 import { API, URL_API } from '../../../API/comunicacionApi';
-// import { TitlesTop } from '../../../Components/titles';
+// import Title from '../../../Components/titles/titles';
 
-import TitlesTop from '../../../Components/titles/titlesTop'
+import { TitlesTop } from '../../../Components/titles/titlesTop';
 class Forms extends Component {
 
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
             data1: [
@@ -47,14 +47,17 @@ class Forms extends Component {
         }
 
         if (pass) {
-            API.PUT(`${URL_API}/user/update/${this.props.user.id_person._id}`, { password: this.props.passW, profile: this.props.typeProfile })
+            // API.PUT(`${URL_API}/user/update/${this.props.user._id}`, { password: this.props.passW, profile: this.props.typeProfile })
+            API.PUT(`/api/usuario/${this.props.user._id}`, { password: this.props.passW, profile: this.props.typeProfile })
                 .then(({ data }) => {
-                    console.log(data);
+                    console.log('Mostrar data--->', data);
                     if (data.n == 0) {
+                        console.log('Mostrar data--->', data);
                         this.setState({
                             error: 'error en el servidor intentelo mas tarde'
                         })
                     } else {
+                        console.log('Mostrar data--->', data);
                         this.props.user.profile = this.props.typeProfile;
                         this.props.update_user(this.props.user);
                         this.pass()
@@ -67,7 +70,7 @@ class Forms extends Component {
                         loading: false
                     })
                 })
-            this.props.update_user(this.props.user);
+            // this.props.update_user(this.props.user);
         } else {
             this.setState({ error: "Verifique los datos", loading: false })
             setTimeout(() => {
@@ -79,11 +82,11 @@ class Forms extends Component {
     render() {
         const { loading } = this.state;
         const { navigate } = this.props.navigation;
+        console.log(this.props.user.nombre)
         return (
             <View style={styles.contentGeneral} >
                 <TitlesTop title='FORMULARIO DE REGISTRO' txtColor='#FFF' bgColor='#FF8C01' fontSize={22} />
                 {/* <Title colorBorder='#E88100' colorBg='#E88100' colorText="#fff" title="FORMULARIO DE REGISTRO" /> */}
-                
                 <ScrollView >
                     <View style={styles.contentCards}>
                         <View>
@@ -151,6 +154,7 @@ class Forms extends Component {
                     </View>
                 </ScrollView>
             </View>
+
         );
     }
 }
@@ -162,7 +166,7 @@ const styles = StyleSheet.create({
     contentCards: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical:24,
+        marginVertical: 24,
     },
     errorTextStyle: {
         alignSelf: 'center',
@@ -177,7 +181,8 @@ const mapStateToProps = (state) => {
         typeProfile: state.people.typeProfile,
         statusPassW: state.configRegister.statusPassword,
         statusVehi: state.configRegister.statusVehiculo,
-        passW: state.configRegister.passWord
+        passW: state.configRegister.passWord,
+        registro: state.configRegister.Registro
     }
 }
 
