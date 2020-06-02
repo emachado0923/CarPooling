@@ -3,7 +3,7 @@ import { GET_STATE_PASSWORD, GET_STATE_VEHICULO, GET_PASSWORD, GET_PASS, REGISTR
 
 
 export default (state = {
-    statusPassword: false,
+    // statusPassword: false,
     statusVehiculo: false,
     passWord: "",
     pass: false,
@@ -13,7 +13,8 @@ export default (state = {
         correo: '',
         centro: '',
         dirección: '',
-        profile: ''
+        profile: '',
+        contraseña: ''
     }
 }, action) => {
     switch (action.type) {

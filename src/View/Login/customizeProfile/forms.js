@@ -11,7 +11,7 @@ import { API, URL_API } from '../../../API/comunicacionApi';
 import { TitlesTop } from '../../../Components/titles/titlesTop';
 class Forms extends Component {
 
-    constructor(props) {
+    constructor() {
         super();
         this.state = {
             data1: [
@@ -36,28 +36,39 @@ class Forms extends Component {
         this.props.update_pass(true);
     }
 
+    // save() {
+    //     this.setState({ loading: true })
+    //     this.props.update_user(this.props.user);
+    //     let pass = false;
+    //     if (this.props.typeProfile == "CONDUCTOR") {
+    //         if (this.props.statusPassW && this.props.statusVehi) pass = true;
+    //     } else {
+    //         if (this.props.statusPassW) pass = true;
+    //     }
     save() {
         this.setState({ loading: true })
         this.props.update_user(this.props.user);
         let pass = false;
         if (this.props.typeProfile == "CONDUCTOR") {
-            if (this.props.statusPassW && this.props.statusVehi) pass = true;
+            if (this.props.statusVehi) pass = true;
         } else {
-            if (this.props.statusPassW) pass = true;
+            if (this.props.typeProfile == 'PASAJERO') pass = true;
         }
+
 
         if (pass) {
             // API.PUT(`${URL_API}/user/update/${this.props.user._id}`, { password: this.props.passW, profile: this.props.typeProfile })
-            API.PUT(`/api/usuario/${this.props.user._id}`, { password: this.props.passW, profile: this.props.typeProfile })
+            API.PUT(`/api/usuario/${this.props.user._id}`, { profile: this.props.typeProfile })
                 .then(({ data }) => {
-                    console.log('Mostrar data--->', data);
+                    data = this.props.user
+                    console.log('esto es data then--->', data)
+                    console.log('este es el perfil-->', this.props.typeProfile)
                     if (data.n == 0) {
-                        console.log('Mostrar data--->', data);
                         this.setState({
                             error: 'error en el servidor intentelo mas tarde'
                         })
-                    } else {
-                        console.log('Mostrar data--->', data);
+                    }
+                    else {
                         this.props.user.profile = this.props.typeProfile;
                         this.props.update_user(this.props.user);
                         this.pass()
@@ -65,6 +76,7 @@ class Forms extends Component {
                     this.setState({ loading: false });
                 })
                 .catch(() => {
+                    console.log('esto es data catch--->', data)
                     this.setState({
                         error: 'Error en la conexión',
                         loading: false
@@ -99,7 +111,8 @@ class Forms extends Component {
                             description='Descripción de lo que debe hacer'
                             borderRadius={10}
                             config={true}
-                            estado={this.props.statusPassW ? "Completo" : "Incompleto"}
+                            // estado={this.props.statusPassW ? "Completo" : "Incompleto"}
+                            estado='Completo'
                             onPress={() => navigate("DataPersonal")}
                             iconName='user'
                             iconSize={36}

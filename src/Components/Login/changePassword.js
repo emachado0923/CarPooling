@@ -68,6 +68,7 @@ class ChangePassword extends Component {
     this.props.update_statusPassW(true);
     this.setState({ loading: false });
     this.props.navigation.navigate("DataPersonal");
+    console.log('Cambió la contraseña-->',password1)
   }
 
   render() {

@@ -30,7 +30,6 @@ class SelectRol extends Component {
     this.setState({
       deviceWidth
     })
-    // console.log('Mostrar el registro', AsyncStorage.getItem('usuarioRegistro'))
 
   }
 
@@ -57,9 +56,10 @@ class SelectRol extends Component {
 
   async next(type) {
     await this.props.typeProfile(type)
-    let data = this.props.registro
+    let data = this.props.user
     data.profile = type
     this.props.registrar(data)
+    console.log('registro data--->', data)
     this.props.navigation.navigate("Forms")
   }
 
@@ -132,14 +132,12 @@ class SelectRol extends Component {
 const styles = StyleSheet.create({
   contaitnerGen: {
     minHeight: '100%',
-    // backgroundColor: 'pink',
   },
   contSec1: {
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
     paddingVertical: 36,
-    // backgroundColor: 'blue'
   },
   imageTop: {
     width: 150,
@@ -150,7 +148,6 @@ const styles = StyleSheet.create({
     paddingVertical: 36,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: '#fff',
     paddingHorizontal: 12,
 
   },
@@ -166,7 +163,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // backgroundColor: 'red',
   },
 });
 

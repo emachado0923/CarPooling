@@ -33,7 +33,7 @@ class DataPersonal extends Component {
           description="Algo breve mientras tanto :)"
           borderRadius={10}
           config={true}
-          estado={this.props.statusPassW ? "Completo" : "Incompleto"}
+          estado= "Completo" 
           iconName='user'
           iconSize={40}
         />
@@ -80,15 +80,16 @@ class DataPersonal extends Component {
               labelSize={18}
               labelWeight='bold'
             />
+            
             <View style={styles.contentBtns}>
-              <Button
+              {/* <Button
                 title="Cambiar contraseña"
                 onPress={() => this.props.navigation.navigate("ChangePassword")}
                 bgColor='#00AA37'
                 colorText='#fff'
                 fontSize={16}
                 widthSize={'60%'}
-              />
+              /> */}
               <Text style={errorTextStyle}>
                 {error}
               </Text>

@@ -3,10 +3,10 @@ import { View, ScrollView, Text, StyleSheet, Image } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { TitlesTop } from '../../Components/titles/titlesTop';
 import { Input, Button } from '../../Components/common';
-import { API } from '../../API/comunicacionApi';
-import AsyncStorage from '@react-native-community/async-storage';
+import { API, URL_API } from '../../API/comunicacionApi';
+// import AsyncStorage from '@react-native-community/async-storage';
 import { Registro } from '../../redux/actions/configRegister';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 // import CustomizeProfile from './customizeProfile/index';
 
 
@@ -19,15 +19,16 @@ class Register extends Component {
             correo: '',
             centro: '',
             dirección: '',
-            profile: 'ninguno'
+            profile: 'ninguno',
+            contraseña: ''
         }
     }
-
-    async registrarUsuario() {
+    registrarUsuario() {
         this.props.registrar(this.state)
-
+        // API.POST(`${URL_API}/api/usuario`, this.state)
         this.props.navigation.navigate("SelectRol")
-        // console.log('Mostrar el registro',AsyncStorage.getItem('usuarioRegistro'))
+        // console.log('Mostrar el registro', AsyncStorage.getItem('usuarioRegistro'))
+        console.log('Mostrar registro --->', this.state)
 
     }
 
@@ -96,6 +97,15 @@ class Register extends Component {
                                         placeholder='Ingresa tu dirección'
                                         onChangeText={(value) => this.setState({ dirección: value })}
                                     />
+                                    <Input
+                                        labelColor='#00AA37'
+                                        labelSize={20}
+                                        fontInputSize={20}
+                                        label='Contraseña'
+                                        borderBottomColor='#00AA37'
+                                        placeholder='Ingresa tu contraseña'
+                                        onChangeText={(value) => this.setState({ contraseña: value })}
+                                    />
                                 </View>
                                 <View style={styles.contBtns}>
                                     <Button
@@ -110,7 +120,6 @@ class Register extends Component {
                         </ScrollView>
                     </Col>
                 </Row>
-
             </Grid>
         )
     }
@@ -122,10 +131,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         marginTop: 36,
-        // backgroundColor: '#16ade1'
-    },
-    contImg: {
-        // backgroundColor:'white'
     },
     stylesImg: {
         width: 200,
@@ -134,17 +139,14 @@ const styles = StyleSheet.create({
     contForm: {
         flex: 1,
         width: '100%',
-        // height:700,
         justifyContent: 'space-between',
         paddingHorizontal: 24,
         paddingVertical: 24,
-        // backgroundColor: 'pink'
     },
     contBtns: {
         width: '100%',
         alignItems: 'center',
         paddingVertical: 16,
-        // backgroundColor: 'blue'
     }
 })
 
