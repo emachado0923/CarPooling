@@ -48,6 +48,7 @@ class Forms extends Component {
     save() {
         this.setState({ loading: true })
         this.props.update_user(this.props.user);
+        var data = this.props.user;
         let pass = false;
         if (this.props.typeProfile == "CONDUCTOR") {
             if (this.props.statusVehi) pass = true;
@@ -55,14 +56,13 @@ class Forms extends Component {
             if (this.props.typeProfile == 'PASAJERO') pass = true;
         }
 
-
         if (pass) {
             // API.PUT(`${URL_API}/user/update/${this.props.user._id}`, { password: this.props.passW, profile: this.props.typeProfile })
             API.PUT(`/api/usuario/${this.props.user._id}`, { profile: this.props.typeProfile })
+            // API.POST(`/api/usuario/`, { profile: this.props.typeProfile })
+
                 .then(({ data }) => {
-                    data = this.props.user
                     console.log('esto es data then--->', data)
-                    console.log('este es el perfil-->', this.props.typeProfile)
                     if (data.n == 0) {
                         this.setState({
                             error: 'error en el servidor intentelo mas tarde'
@@ -76,9 +76,9 @@ class Forms extends Component {
                     this.setState({ loading: false });
                 })
                 .catch(() => {
-                    console.log('esto es data catch--->', data)
+                    console.log('erro, entra a catch')
                     this.setState({
-                        error: 'Error en la conexión',
+                       error: 'Error en la conexión',
                         loading: false
                     })
                 })

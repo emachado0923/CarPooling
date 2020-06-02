@@ -56,7 +56,7 @@ class SelectRol extends Component {
 
   async next(type) {
     await this.props.typeProfile(type)
-    let data = this.props.user
+    let data = this.props.user(dataRegistro)
     data.profile = type
     this.props.registrar(data)
     console.log('registro data--->', data)

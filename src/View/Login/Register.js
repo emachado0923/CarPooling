@@ -25,10 +25,12 @@ class Register extends Component {
     }
     registrarUsuario() {
         this.props.registrar(this.state)
+        
+        let dataRegistro = this.props.registrar(this.state);
         // API.POST(`${URL_API}/api/usuario`, this.state)
         this.props.navigation.navigate("SelectRol")
         // console.log('Mostrar el registro', AsyncStorage.getItem('usuarioRegistro'))
-        console.log('Mostrar registro --->', this.state)
+        console.log('Mostrar registro --->', dataRegistro)
 
     }
 
