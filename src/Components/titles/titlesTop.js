@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-export const TitlesTop = ({ title, bgColor, txtColor, fontSize, alingTxt, widthSize }) => {
+export const TitlesTop = ({ title, bgColor, txtColor, fontSize, alingTxt, widthSize,paddingLeft, borderRadius }) => {
     return (
         <View style={{
             backgroundColor: bgColor || 'transparent',
             maxWidth: widthSize || '80%',
             justifyContent: 'center',
             marginTop: 12,
-            borderTopRightRadius: 4,
-            borderBottomRightRadius: 4,
+            borderTopRightRadius: borderRadius || 4,
+            borderBottomRightRadius: borderRadius || 4,
             paddingVertical: 8,
-            paddingLeft: 8,
+            paddingLeft: paddingLeft || 8,
         }}>
             <Text style={{
                 fontSize: fontSize || 24,
