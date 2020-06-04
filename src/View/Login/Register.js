@@ -21,23 +21,19 @@ class Register extends Component {
             centro: '',
             dirección: '',
             profile: '',
-            contraseña: ''
+            contraseña: '',
+            vehiculo: {}
         }
     }
     async registrarUsuario() {
-        this.props.registrar(this.state)
-
-        let dataRegistro = this.props.registrar(this.state);
-        await API.POST(`${URL_API}/api/usuario`, this.state)
+        
+        await API.POST(`/api/usuario`, this.state)
             .then(() => {
                 console.log('Muestra los datos de registro-->', this.state)
             })
             .catch(() => {
                 console.log('Error')
             })
-        // this.props.navigation.navigate("SelectRol")
-        // console.log('Mostrar el registro', AsyncStorage.getItem('usuarioRegistro'))
-        // console.log('Mostrar registro --->', dataRegistro)
 
     }
 
@@ -125,6 +121,9 @@ class Register extends Component {
                                         bgColor="#00AA37"
                                         txtColor='#fff'
                                     />
+                                    <Text style={{ padding: 20, fontSize: 20, textAlign: 'center' }}>
+                                        ¿Serás un Conductor o un Pasajero?
+                                    </Text>
                                     <View style={styles.btnsCont}>
                                         <ButtonSelect
                                             title="Conductor"
@@ -165,6 +164,11 @@ class Register extends Component {
                                                 labelSize={20}
                                                 fontInputSize={20}
                                                 borderBottomColor='#00AA37'
+                                                onChangeText={(value)=> {
+                                                    let {vehiculo} = this.state;
+                                                    vehiculo.marca = value
+                                                    this.setState({vehiculo})
+                                                }}
                                             />
                                             <Input
                                                 label='Modelo'
@@ -173,14 +177,11 @@ class Register extends Component {
                                                 labelSize={20}
                                                 fontInputSize={20}
                                                 borderBottomColor='#00AA37'
-                                            />
-                                            <Input
-                                                label='Tipo de vehículo'
-                                                placeholder='Ingresa el tipo de vehículo'
-                                                labelColor='#00AA37'
-                                                labelSize={20}
-                                                fontInputSize={20}
-                                                borderBottomColor='#00AA37'
+                                                onChangeText={(value)=> {
+                                                    let {vehiculo} = this.state;
+                                                    vehiculo.modelo = value
+                                                    this.setState({vehiculo})
+                                                }}
                                             />
                                             <Input
                                                 label='Número de placa'
@@ -189,12 +190,17 @@ class Register extends Component {
                                                 labelSize={20}
                                                 fontInputSize={20}
                                                 borderBottomColor='#00AA37'
+                                                onChangeText={(value)=> {
+                                                    let {vehiculo} = this.state;
+                                                    vehiculo.placa = value
+                                                    this.setState({vehiculo})
+                                                }}
                                             />
                                         </View>
                                         : profile == 'PASAJERO' ?
                                             <View style={styles.formDataCar}>
                                                 <Text style={styles.textPasajero}>
-                                                    Seleccionaste el rol Pasajero, ya puedes registrarte
+                                                    SELECCIONASTE EL ROL DE PASAJERO, YA TE PUEDES REGISTRAR.
                                                 </Text>
                                             </View>
                                             : null
@@ -247,8 +253,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24
     },
     textPasajero: {
-        fontSize: 20,
-
+        fontSize: 18,
+        color: '#00AA37',
+        fontWeight: 'bold',
+        textAlign: 'center'
     },
     btnsCont: {
         width: '100%',

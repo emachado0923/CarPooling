@@ -1,18 +1,8 @@
 import React, { Component } from "react";
-import {
-  View,
-  FlatList,
-  SafeAreaView,
-  Text,
-  ActivityIndicator,
-  StyleSheet,
-  ScrollView,
-  Label
-} from "react-native";
-import { Button } from "../../Components/common";
+import { View, Text } from "react-native";
 import { connect } from "react-redux";
 import { deleteJWT } from "../../redux/actions/services";
-import { Grid, Row, Col } from "react-native-easy-grid";
+import { Grid, Row } from "react-native-easy-grid";
 
 // Componentes
 import { ButtonMenu } from "../../Components/common/ButtonMenu";
@@ -36,37 +26,37 @@ class Perfil extends Component {
       <Grid>
         <Row size={1} style={containerBody}>
           <Row size={3} style={myProfile}>
-            
-            <Row size={1} style={profilePoints}>
-                <View>
-                    <Text>Puntos</Text>
-                </View>
 
-                <View>
-                    <Text>{this.props.user.profile}</Text>
-                </View>
+            <Row size={1} style={profilePoints}>
+              <View>
+                <Text>Puntos</Text>
+              </View>
+
+              <View>
+                <Text>{this.props.user.profile}</Text>
+              </View>
             </Row>
 
             <Row size={3} style={profilePhoto}>
-                <View style={photoPerson}>
-                    <Text>Foto</Text>
-                </View>
+              <View style={photoPerson}>
+                <Text>Foto</Text>
+              </View>
             </Row>
 
             <Row size={2} style={profileDescription}>
-                <Text style={personName}>{this.props.user.id_person.nombre}</Text>
-                <Text style={personDescription}>Hola! Soy Juan y aqui va toda mi descripcion que yo haya querido poner al principio de la app.</Text>
+              <Text style={personName}>{this.props.user.nombre}</Text>
+              <Text style={personDescription}>Hola! Soy Juan y aqui va toda mi descripcion que yo haya querido poner al principio de la app.</Text>
             </Row>
-            
+
           </Row>
 
-          {/* <Text style={text}>Tipo deperfil: {this.props.user.profile}</Text>
+          <Text style={text}>Tipo deperfil: {this.props.user.profile}</Text>
 
-<Text style={text}>Nombre: {this.props.user.id_person.nombre}</Text>
+          <Text style={text}>Nombre: {this.props.user.nombre}</Text>
 
-<Text style={text}>Correo: {this.props.user.id_person.email}</Text>
+          <Text style={text}>Correo: {this.props.user.correo}</Text>
 
-<Text style={text}>Ciudad: {this.props.user.id_person.ciudad}</Text> */}
+          <Text style={text}>Ciudad: {this.props.user.dirección}</Text>
 
           <Row size={3} style={menuProfile}>
             <View style={menuBg}>
@@ -137,27 +127,27 @@ const styles = {
     justifyContent: "flex-end",
     alignItems: "flex-start"
   },
-  profilePoints:{
+  profilePoints: {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  profilePhoto:{
+  profilePhoto: {
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
   },
-  photoPerson:{
+  photoPerson: {
     width: 150,
     height: 150,
     borderRadius: 100,
     borderWidth: 2,
     borderColor: 'black'
   },
-  profileDescription:{
+  profileDescription: {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -165,12 +155,12 @@ const styles = {
     alignItems: 'center',
     textAlign: 'center',
     padding: '5%'
-  },personName:{
-      textAlign: 'center',
-      color: '#238276',
-      fontSize: 24
-  },personDescription:{
-      textAlign: 'center',
+  }, personName: {
+    textAlign: 'center',
+    color: '#238276',
+    fontSize: 24
+  }, personDescription: {
+    textAlign: 'center',
   }
 };
 
