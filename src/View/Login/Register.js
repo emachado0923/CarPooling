@@ -29,7 +29,7 @@ class Register extends Component {
         
         await API.POST(`/api/usuario`, this.state)
             .then(() => {
-                console.log('Muestra los datos de registro-->', this.state)
+                alert('Registro completado')
             })
             .catch(() => {
                 console.log('Error')
@@ -112,6 +112,7 @@ class Register extends Component {
                                         borderBottomColor='#FF8C01'
                                         placeholder='Ingresa tu contraseña'
                                         onChangeText={(value) => this.setState({ contraseña: value })}
+                                        // secureTextEntry={true}
                                     />
                                 </View>
                                 <View style={styles.contSelectionRol}>
