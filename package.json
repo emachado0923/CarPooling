@@ -16,6 +16,7 @@
         "axios": "^0.19.2",
         "expo": "~37.0.3",
         "expo-updates": "~0.1.0",
+        "formik": "^2.1.4",
         "link": "^0.1.5",
         "lottie-react-native": "^3.3.2",
         "react": "~16.9.0",
@@ -37,7 +38,8 @@
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0",
         "remote-redux-devtools": "^0.5.16",
-        "styled-components": "^5.1.0"
+        "styled-components": "^5.1.0",
+        "yup": "^0.29.1"
     },
     "devDependencies": {
         "@babel/core": "~7.9.0",
