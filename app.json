@@ -1,17 +1,17 @@
 {
-  "name": "appSena",
-  "displayName": "appSena",
-  "expo": {
     "name": "appSena",
-    "slug": "appSena",
-    "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "assetBundlePatterns": [
-      "**/*"
-    ]
-  }
+    "displayName": "appSena",
+    "expo": {
+        "name": "appSena",
+        "slug": "appSena",
+        "version": "1.0.0",
+        "platforms": [
+            "ios",
+            "android",
+            "web"
+        ],
+        "assetBundlePatterns": [
+            "**/*"
+        ]
+    }
 }
