@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  View,
-  FlatList,
-  SafeAreaView,
-  Text,
-  ActivityIndicator,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View,StyleSheet} from "react-native";
 
 import { Grid, Col, Row } from "react-native-easy-grid";
 
@@ -16,18 +8,42 @@ import Select from '../../Components/Forms/Select';
 
 export default class Viajes extends Component {
   render() {
-    const { travelsMap } = styles;
     return (
       <Grid>
-        <Row size={1} style={travelsMap}>
+        <Row style={styles.container}>
+          <View style={styles.subContainer}>
             <Select></Select>
+          </View>
         </Row>
       </Grid>
     );
   }
 }
-const styles = {
-  travelsMap: {
-    width: "100%",
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '30%',
+    backgroundColor: '#FF8C01',
+    paddingHorizontal: 24,
+    paddingBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: {width: 0,height: 2,},
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  subContainer: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#F0F0F0',
+    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: "#000",
+    shadowOffset: {width: 0,height: 2,},
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   }
-};
+}) 
