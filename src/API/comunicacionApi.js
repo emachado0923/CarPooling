@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const URL_API = "http://192.168.1.9:3000";
-// const URL_API = "http://192.168.1.9:3001"; 
+const URL_API = "http://192.168.1.58:3000";
+// const URL_API = "http://192.168.1.9:3001";
 const AXIOS = axios.create({ timeout: 5000 });
 
 class AP {
