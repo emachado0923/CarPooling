@@ -6,7 +6,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 //Components
 import Select from '../../Components/Forms/Select';
 import Card from "../../Components/cards/card";
-import { Button } from "../../Components/common/Button";
+import { Button, Input } from "../../Components/common";
 
 export default class Viajes extends Component {
   render() {
@@ -14,7 +14,13 @@ export default class Viajes extends Component {
       <Grid>
         <Row style={styles.container}>
           <View style={styles.subContainer}>
-            <Select></Select>
+            <Select title='Origen'></Select>
+            <Input
+            label='Destino'
+            placeholder='Dirección de tu destino'
+
+            />
+          
           </View>
         </Row>
         <Row style={styles.contMap}>
@@ -67,6 +73,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    paddingHorizontal:12
   },
   contMap: {
     flex: 2,

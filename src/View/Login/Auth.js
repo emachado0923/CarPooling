@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Alert, Text, Image, Dimensions, Keyboard, Animated } from "react-native";
+import { View, Alert, Text, Image, Dimensions, Keyboard, Animated, StyleSheet } from "react-native";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import LottieView from "lottie-react-native";
 import anim from "../../resources/animations/backgraounds/wavesGreen.json";
@@ -160,19 +160,21 @@ class Auth extends Component {
                 />
               </View>
               <View>
-                <Input
-                  label={"Correo Electrónico"}
-                  onChangeText={correo => this.setState({ correo })}
-                  placeholder="Ingrese su correo @misena.edu.co"
-                  style={{ width: "85%", color: "green" }}
-                />
-                <Input
-                  label={"Contraseña"}
-                  secureTextEntry
-                  onChangeText={contraseña => this.setState({ contraseña })}
-                  placeholder="Ingrese su contraseña"
-                />
-                <Text style={errorTextStyle}>{error}</Text>
+                <View style={styles.contInputs}>
+                  <Input
+                    label={"Correo Electrónico"}
+                    onChangeText={correo => this.setState({ correo })}
+                    placeholder="Ingrese su correo SENA"
+                    style={{ width: "85%", color: "green" }}
+                  />
+                  <Input
+                    label={"Contraseña"}
+                    secureTextEntry
+                    onChangeText={contraseña => this.setState({ contraseña })}
+                    placeholder="Ingrese su contraseña"
+                  />
+                </View>
+                <Text style={styles.errorTextStyle}>{error}</Text>
 
                 <View style={{
                   minHeight: 80,
@@ -258,18 +260,22 @@ class Auth extends Component {
 
 }
 
-const styles = {
+const styles = StyleSheet.create({
   containerStyle: {
     height: 40,
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
+  },
+  contInputs:{ 
+    width:'90%',
+    paddingHorizontal:12,
   },
   errorTextStyle: {
     alignSelf: "center",
     fontSize: 18,
     color: "red"
   }
-};
+});
 
 const mapStateToProps = state => {
   return {
