@@ -2,17 +2,15 @@ import React from 'react';
 import { View, TextInput, Text } from 'react-native';
 
 export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, numberOfLines, editable, borderBottomColor, fontInputSize, labelColor, labelSize, labelWeight }) => {
-  const {  containerStyle } = styles;
-  // inputStyle.borderBottomColor = borderBottomColor
   let inputStyle = {
-    width: '100%',
+    minWidth: '100%',
     borderBottomWidth: 2,
     borderBottomColor: borderBottomColor || '#FF8C01',
     textAlign: 'left',
-    fontSize: fontInputSize || 16  ,
+    fontSize: fontInputSize || 16,
     margin: 0,
     padding: 0,
-    color:'#000'
+    color: '#000'
 
   }
   let labelStyle = {
@@ -21,10 +19,14 @@ export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry
     margin: 0,
     padding: 2,
     fontSize: labelSize || 16,
-    fontWeight: labelWeight 
+    fontWeight: labelWeight
   }
   return (
-    <View style={containerStyle}>
+    <View style={{
+      width:'100%',
+      marginVertical: 12,
+      padding:0,
+    }}>
       <Text style={labelStyle}>{label}</Text>
       <TextInput
         secureTextEntry={secureTextEntry}
@@ -38,11 +40,4 @@ export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry
       />
     </View>
   );
-};
-
-const styles = {
-  containerStyle: {
-    minWidth: '80%',
-    marginVertical: 12
-  }
 };
