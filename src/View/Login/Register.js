@@ -19,7 +19,6 @@ class Register extends Component {
     constructor(props) {
         super()
         this.state = {
-
             vehiculo: {}
         }
     }
@@ -47,18 +46,36 @@ class Register extends Component {
                 centro: '',
                 dirección: '',
                 contraseña: '',
-                profile: ''
+                profile: '',
+                marca: '',
+                modelo: '',
+                placa: ''
             }} onSubmit={values => this.registrarUsuario(values)}
-                    validationSchema={yup.object().shape({
+                    validationSchema={
+                        yup.object().shape({
 
-                        nombre: yup.string().required('El nombre es obligatorio!'),
-                        apellido: yup.string().required('El apellido es obligatorio!'),
-                        correo: yup.string().required('El correo es obligatorio!').email(),
-                        centro: yup.string().required('El centro es obligatorio!'),
-                        dirección: yup.string().required('La dirección es obligatoria!'),
-                        contraseña: yup.string().required('La Contraseña es obligatoria').min(7, 'La contraseña debe tener más de 7 caracteres!'),
-                        profile: yup.string().required('Selecciona un rol!')
-                    })}>
+                            nombre: yup.string().required('El nombre es obligatorio!').min(7, 'El nombre debe tener más de 7 caracteres!').max(40, 'Por favor ingrese no más de 40 caracteres'),
+                            apellido: yup.string().required('El apellido es obligatorio!').min(7, 'El apellido debe tener más de 7 caracteres!').max(40, 'Por favor ingrese no más de 40 caracteres'),
+                            correo: yup.string().required('El correo es obligatorio!').email('Direccion de correo invalida!'),
+                            centro: yup.string().required('El centro es obligatorio!'),
+                            dirección: yup.string().required('La dirección es obligatoria!').min(7, 'La direccion debe tener más de 7 caracteres!'),
+                            contraseña: yup.string().required('La Contraseña es obligatoria').min(7, 'La contraseña debe tener más de 7 caracteres!'),
+                            profile: yup.string().required('Selecciona un rol!'),
+
+                            marca: yup.string().when('profile', {
+                                is: 'CONDUCTOR', then: yup.string().required('La marca es obligatoria!')
+                            }),
+                            modelo: yup.string().when('profile', {
+                                is: 'CONDUCTOR', then: yup.string().required('El modelo es obligatorio!'),
+                            }),
+
+
+                            placa: yup.string().when('profile', {
+                                is: 'CONDUCTOR', then: yup.string().required('La placa es obligatoria!'),
+                            }),
+
+
+                        })}>
                 {({values, handleBlur, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit}) => (
                     <Grid>
                         <Row>
@@ -219,13 +236,14 @@ class Register extends Component {
                                                     borderRadius={24}
                                                 />
                                             </View>
-                                            {touched.profile && errors.profile &&
-                                            <Text style={{fontSize: 15, color: 'red'}}>
-                                                <Icon name={'exclamation-circle'} size={20}/> {errors.profile}
-                                            </Text>
-                                            }
-
-                                            {profile == 'CONDUCTOR' ?
+                                            <View style={{alignItems: 'center'}}>
+                                                {touched.profile && errors.profile &&
+                                                <Text style={{fontSize: 15, color: 'red'}}>
+                                                    <Icon name={'exclamation-circle'} size={20}/> {errors.profile}
+                                                </Text>
+                                                }
+                                            </View>
+                                            {profile == 'CONDUCTOR' && values.profile == 'CONDUCTOR' ?
                                                 <View style={styles.formDataCar}>
                                                     <TitlesTop
                                                         title='LLENA LA INFORMACIÓN DE TU VEHÍCULO'
@@ -244,12 +262,22 @@ class Register extends Component {
                                                         labelSize={20}
                                                         fontInputSize={20}
                                                         borderBottomColor='#00AA37'
-                                                        onChangeText={(value) => {
+
+                                                        /*onChangeText={(value) => {
                                                             let {vehiculo} = this.state;
                                                             vehiculo.marca = value
                                                             this.setState({vehiculo})
-                                                        }}
+                                                        }}*/
+                                                        onBlur={handleBlur('marca')}
+                                                        onChangeText={handleChange('marca')}
+                                                        values={values.marca}
+
                                                     />
+                                                    {touched.marca && errors.marca &&
+                                                    <Text style={{fontSize: 15, color: 'red'}}>
+                                                        <Icon name={'exclamation-circle'} size={20}/> {errors.marca}
+                                                    </Text>
+                                                    }
                                                     <Input
                                                         label='Modelo'
                                                         placeholder='Ingresa el modelo de tu vehículo'
@@ -257,12 +285,20 @@ class Register extends Component {
                                                         labelSize={20}
                                                         fontInputSize={20}
                                                         borderBottomColor='#00AA37'
-                                                        onChangeText={(value) => {
+                                                        /*onChangeText={(value) => {
                                                             let {vehiculo} = this.state;
                                                             vehiculo.modelo = value
                                                             this.setState({vehiculo})
-                                                        }}
+                                                        }}*/
+                                                        onBlur={handleBlur('modelo')}
+                                                        onChangeText={handleChange('modelo')}
+                                                        values={values.modelo}
                                                     />
+                                                    {touched.modelo && errors.modelo &&
+                                                    <Text style={{fontSize: 15, color: 'red'}}>
+                                                        <Icon name={'exclamation-circle'} size={20}/> {errors.modelo}
+                                                    </Text>
+                                                    }
                                                     <Input
                                                         label='Número de placa'
                                                         placeholder='Ingresa tu número de placa'
@@ -270,14 +306,24 @@ class Register extends Component {
                                                         labelSize={20}
                                                         fontInputSize={20}
                                                         borderBottomColor='#00AA37'
-                                                        onChangeText={(value) => {
+
+                                                        /*onChangeText={(value) => {
                                                             let {vehiculo} = this.state;
                                                             vehiculo.placa = value
                                                             this.setState({vehiculo})
-                                                        }}
+                                                        }}*/
+                                                        onBlur={handleBlur('placa')}
+                                                        onChangeText={handleChange('placa')}
+                                                        values={values.placa}
                                                     />
+                                                    {touched.placa && errors.placa &&
+                                                    <Text style={{fontSize: 15, color: 'red'}}>
+                                                        <Icon name={'exclamation-circle'} size={20}/> {errors.placa}
+                                                    </Text>
+                                                    }
+
                                                 </View>
-                                                : profile == 'PASAJERO' ?
+                                                : profile == 'PASAJERO' && values.profile == 'PASAJERO' ?
                                                     <View style={styles.formDataCar}>
                                                         <Text style={styles.textPasajero}>
                                                             SELECCIONASTE EL ROL DE PASAJERO, YA TE PUEDES REGISTRAR.
