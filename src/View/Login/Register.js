@@ -56,7 +56,7 @@ class Register extends Component {
 
                             nombre: yup.string().required('El nombre es obligatorio!').min(7, 'El nombre debe tener más de 7 caracteres!').max(40, 'Por favor ingrese no más de 40 caracteres'),
                             apellido: yup.string().required('El apellido es obligatorio!').min(7, 'El apellido debe tener más de 7 caracteres!').max(40, 'Por favor ingrese no más de 40 caracteres'),
-                            correo: yup.string().required('El correo es obligatorio!').email('Direccion de correo invalida!'),
+                            correo: yup.string().required('El correo es obligatorio!').email('Direccion de correo invalida!').matches(/(misena.edu.co$|sena.edu.co$)/, 'Solo se permiten correos sena'),
                             centro: yup.string().required('El centro es obligatorio!'),
                             dirección: yup.string().required('La dirección es obligatoria!').min(7, 'La direccion debe tener más de 7 caracteres!'),
                             contraseña: yup.string().required('La Contraseña es obligatoria').min(7, 'La contraseña debe tener más de 7 caracteres!'),
@@ -68,7 +68,6 @@ class Register extends Component {
                             modelo: yup.string().when('profile', {
                                 is: 'CONDUCTOR', then: yup.string().required('El modelo es obligatorio!'),
                             }),
-
 
                             placa: yup.string().when('profile', {
                                 is: 'CONDUCTOR', then: yup.string().required('La placa es obligatoria!'),
