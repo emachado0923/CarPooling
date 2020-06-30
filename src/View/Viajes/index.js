@@ -7,6 +7,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import Select from '../../Components/Forms/Select';
 import Card from "../../Components/cards/card";
 import { Button, Input } from "../../Components/common";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default class Viajes extends Component {
   render() {
@@ -16,33 +17,37 @@ export default class Viajes extends Component {
           <View style={styles.subContainer}>
             <Select title='Origen'></Select>
             <Input
-            label='Destino'
-            placeholder='Dirección de tu destino'
-
+              label='Destino'
+              placeholder='Dirección de tu destino'
             />
-          
           </View>
         </Row>
         <Row style={styles.contMap}>
           <Text>Mapa</Text>
         </Row>
         <Row style={styles.subContainer2}>
-          <View style={styles.imgConduc}>
-          </View>
-          <View style={styles.contBtns}>
-            <Button
-            title='Text'
-            borderColor='#00AA37'
-            borderWidth={2}
-            widthSize='70%'
-            />
-            <Button
-            title='Text'
-            borderColor='#FF8C01'
-            borderWidth={2}
-            widthSize='70%'
-            />
-          </View>
+            <Col style={styles.contImg}>
+              <View style={styles.imgConduc} />
+            </Col>
+            <Col style={styles.contInfo}>
+              <Text>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quam, quisquam adipisci consequatur.
+            </Text>
+              <View style={styles.contBtns}>
+                <Button
+                  title='Text'
+                  borderColor='#00AA37'
+                  borderWidth={2}
+                  widthSize='60%'
+                />
+                <Button
+                  title='Text'
+                  borderColor='#FF8C01'
+                  borderWidth={2}
+                  widthSize='60%'
+                />
+              </View>
+            </Col>
         </Row>
       </Grid>
     );
@@ -50,10 +55,9 @@ export default class Viajes extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: '#FF8C01',
     paddingHorizontal: 24,
-    paddingBottom: 16,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2, },
     shadowOpacity: 0.25,
@@ -61,8 +65,6 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   subContainer: {
-    width: '100%',
-    height: '100%',
     backgroundColor: '#F0F0F0',
     borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
@@ -73,23 +75,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    paddingHorizontal:12
+    padding: 12,
+    marginBottom: 12,
   },
   contMap: {
-    flex: 2,
+    flex: 3,
     height: 100,
     backgroundColor: '#707070',
     justifyContent: 'center',
-    alignItems:'center'
+    alignItems: 'center'
   },
-  
   subContainer2: {
-    flex: 1,
     backgroundColor: '#fff',
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
-    flexDirection:'row',
-    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2, },
@@ -97,20 +98,31 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     position: 'relative',
+    padding: 12,
     marginTop: -8
   },
-  imgConduc:{
-    width: 120,
-    height:120,
-    borderRadius:100,
-    borderWidth:1,
-    borderColor:'#00AA37'
+  contImg: {
+    width: '40%',
+    alignItems: 'center',
   },
-  contBtns:{
-    width:'50%',
-    flexDirection:'row', 
-    justifyContent:'space-around',
-    alignItems:'center'
+  imgConduc: {
+    width: 120,
+    height: 120,
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: '#00AA37'
+  },
+  contInfo: {
+    width: '60%',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contBtns: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 4
   },
 
-}) 
+})
