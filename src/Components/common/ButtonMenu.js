@@ -21,7 +21,7 @@ export const ButtonMenu = ({ onPress, title, colorText, fontSize, iconColor, ico
       >
         {title}
       </Text>
-      <FontAwesome name={iconName} size={iconSize} color={iconColor} />
+      <FontAwesome name={iconName} size={iconSize} color={iconColor || colorText} />
     </TouchableOpacity>
   );
 };
