@@ -5,9 +5,8 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 
 //Components
 import Select from '../../Components/Forms/Select';
-import Card from "../../Components/cards/card";
 import { Button, Input } from "../../Components/common";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 export default class Viajes extends Component {
   render() {
@@ -26,28 +25,28 @@ export default class Viajes extends Component {
           <Text>Mapa</Text>
         </Row>
         <Row style={styles.subContainer2}>
-            <Col style={styles.contImg}>
-              <View style={styles.imgConduc} />
-            </Col>
-            <Col style={styles.contInfo}>
-              <Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quam, quisquam adipisci consequatur.
+          <Col style={styles.contImg}>
+            <View style={styles.imgConduc} />
+          </Col>
+          <Col style={styles.contInfo}>
+            <Text>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quam, quisquam adipisci consequatur.
             </Text>
-              <View style={styles.contBtns}>
-                <Button
-                  title='Text'
-                  borderColor='#00AA37'
-                  borderWidth={2}
-                  widthSize='60%'
-                />
-                <Button
-                  title='Text'
-                  borderColor='#FF8C01'
-                  borderWidth={2}
-                  widthSize='60%'
-                />
-              </View>
-            </Col>
+            <View style={styles.contBtns}>
+              <Button
+                title='Text'
+                borderColor='#00AA37'
+                borderWidth={2}
+                widthSize='60%'
+              />
+              <Button
+                title='Text'
+                borderColor='#FF8C01'
+                borderWidth={2}
+                widthSize='60%'
+              />
+            </View>
+          </Col>
         </Row>
       </Grid>
     );
