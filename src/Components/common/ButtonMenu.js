@@ -1,36 +1,27 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 
-export const ButtonMenu = ({
-  onPress,
-  title,
-  bgColor,
-  colorText,
-  colorBorder
-}) => {
+export const ButtonMenu = ({ onPress, title, colorText, fontSize, iconColor, iconName, iconSize }) => {
   return (
-    <View style={{ flexDirection: "row" }}>
-      <TouchableOpacity
-        onPress={onPress}
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 8
+      }}
+    >
+      <Text
         style={{
-
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
+          color: colorText || '#000',
+          fontSize: fontSize || 18,
+          paddingRight: 8
         }}
       >
-        <Text
-          style={{
-            color: colorText || "black",
-            fontSize: 18,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          {title}
-        </Text>
-      </TouchableOpacity>
-    </View>
+        {title}
+      </Text>
+      <FontAwesome name={iconName} size={iconSize} color={iconColor} />
+    </TouchableOpacity>
   );
 };

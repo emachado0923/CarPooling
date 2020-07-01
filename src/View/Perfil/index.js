@@ -38,7 +38,9 @@ class Perfil extends Component {
                             colorText="black"
                             bgColor="white"
                             colorBorder="#274fb2"
-                            title="Salir"
+                            title='Cerrar sesión'
+                            iconName='sign-out-alt'
+                            iconSize={20}
                         />
                     </Col>
                 </Row>
