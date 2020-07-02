@@ -14,11 +14,11 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 
 //Componentes
 import Notification from "../../Components/Notification/Notification";
-import Titles from "../../Components/titles/titles";
 import Card from "../../Components/cards/card";
+import { TitlesTop } from '../../Components/titles/titlesTop';
 
 export default class Notificaciones extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       infoNotification: false,
@@ -31,36 +31,25 @@ export default class Notificaciones extends Component {
     return (
       <Grid>
         <Col size={1}>
-          <Row size={1.5}>
-            <View style={Styles.imgNotifications}>
-              <Text>Imagen</Text>
-            </View>
-          </Row>
-
+              <TitlesTop title='Noticias' bgColor='#FF8C01' widthSize='50%' txtColor='#fff' />
           <Row size={3}>
             <View style={Styles.bodyNotifications}>
-              <Titles
-                colorBorder="#f09209"
-                colorBg="#f09209"
-                colorText="white"
-                title="Notificaciones"
-              />
 
               <ScrollView style={Styles.listBody}>
                 <Card
                   color="#f09209"
-                  flexDirection= "row"
+                  flexDirection="row"
                   name="Juan"
                   category="Maestros"
-                  
                   description="Querk jasdflkj jkfdsjal jfdskljf skldfjf jsdfklj fjsdkl jljasdfkl JKASDJFKL JFKLJ jfdkalsjfkld jfksdajklfjd jfksdlajf jkljklasfjkldj jsdfklaj jfdskla fjasdkl"
-                  onPress={()=>this.setState({infoNotification: true})}
+                  onPress={() => this.setState({ infoNotification: true })}
                 />
                 <Card
                   color="#f09209"
                   name="Juan"
                   category="Maestros"
                   cantPersons="1"
+                  onPress={() => this.setState({ infoNotification: true })}
                   description="Holas"
                 />
                 <Card
@@ -87,14 +76,14 @@ export default class Notificaciones extends Component {
               </ScrollView>
             </View>
           </Row>
-          
-          {this.state.infoNotification?
-          <View style={Styles.solicitude}>
-            <Notification infoView={()=>this.setState({infoNotification: false})}/>
-          </View> : null
 
-        }
-          
+          {this.state.infoNotification ?
+            <View style={Styles.solicitude}>
+              <Notification infoView={() => this.setState({ infoNotification: false })} />
+            </View> : null
+
+          }
+
         </Col>
       </Grid>
     );
