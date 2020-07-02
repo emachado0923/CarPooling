@@ -2,53 +2,57 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Col } from "react-native-easy-grid";
-import { color } from "react-native-reanimated";
 
-const CardInfo = ({ containerSize, bgColor, size, iconName, iconSize, iconColor, title, colorTitle, sizeTitle, info, colorInfo, sizeInfo }) => {
+const CardInfo = ({ containerSize, bgColor, containerBorder, onPress, size, iconName, iconSize, iconColor, title, colorTitle, sizeTitle, info, colorInfo, sizeInfo }) => {
     return (
-        <View style={{
-            width: containerSize || '100%',
-            borderRadius: 12,
-            padding: 8,
-            backgroundColor: bgColor || '#E0E0E0',
-            marginVertical: 4,
-            flexDirection: 'row', 
-            alignItems:'center'
-
-        }}>
-
-            <Col style={{
-                width: size || 120,
-                height: size || 120,
-                borderRadius: 100,
-                borderColor: '#000',
+        <TouchableHighlight onPress={onPress} underlayColor="rgba(0,0,0,0.1)">
+            <View style={{
+                width: containerSize || '100%',
+                borderRadius: 12,
+                borderColor: containerBorder || 'transparent',
                 borderWidth: 1,
-                justifyContent: 'center',
+                padding: 8,
+                backgroundColor: bgColor || '#E0E0E0',
+                marginVertical: 4,
+                flexDirection: 'row',
                 alignItems: 'center'
             }}>
-                <Icon name={iconName} size={iconSize || 16} color={iconColor} />
-            </Col>
-            <Col style={{
-                padding: 8,
-            }}>
-                <Text style={{
-                    color: colorTitle || '#000',
-                    fontSize: sizeTitle || 20,
-                    fontWeight:'bold'
+                <Col style={{
+                    width: size || 120,
+                    height: size || 120,
+                    borderRadius: 100,
+                    borderColor: colorTitle ||'#000',
+                    borderWidth: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center'
                 }}>
-                    {title}
-                </Text>
-                <Text style={{
-                    fontSize: sizeInfo || 16,
-                    color: colorInfo || '#707070',
-                    borderBottomWidth:1,
-                    paddingVertical:4,
-                    borderBottomColor: colorTitle
+                    <Icon name={iconName} size={iconSize || 16} color={iconColor} />
+                </Col>
+                <Col style={{
+                    padding: 8,
                 }}>
-                    {info}
-                </Text>
-            </Col>
-        </View>
+                    <Text style={{
+                        color: colorTitle || '#000',
+                        fontSize: sizeTitle || 20,
+                        fontWeight: 'bold'
+                    }}>
+                        {title}
+                    </Text>
+                    <Text
+                        numberOfLines={2}
+                        style={{
+                            fontSize: sizeInfo || 16,
+                            color: colorInfo || '#707070',
+                            borderBottomWidth: 1,
+                            paddingVertical: 4,
+                            borderBottomColor: colorTitle,
+                            maxWidth: '90%'
+                        }}>
+                        {info}
+                    </Text>
+                </Col>
+            </View>
+        </TouchableHighlight>
     )
 }
 

@@ -3,10 +3,10 @@ import { View, StyleSheet, ScrollView } from "react-native";
 
 //Responsive
 import { Grid, Col, Row } from "react-native-easy-grid";
-
 //Componentes
 import Notification from "../../Components/Notification/Notification";
 import Card from "../../Components/cards/card";
+import CardInfo from '../../Components/cards/CardInfo';
 import { TitlesTop } from '../../Components/titles/titlesTop';
 
 import Logo from '../../resources/img/LogoSENA-naranja_vector.png'
@@ -30,43 +30,52 @@ export default class Notificaciones extends Component {
             <View style={Styles.bodyNotifications}>
 
               <ScrollView style={Styles.listBody}>
-                <Card
-                  color="#f09209"
-                  flexDirection="row"
-                  name="Juan"
-                  category="Maestros"
-                  description="Querk jasdflkj jkfdsjal jfdskljf skldfjf jsdfklj fjsdkl jljasdfkl JKASDJFKL JFKLJ jfdkalsjfkld jfksdajklfjd jfksdlajf jkljklasfjkldj jsdfklaj jfdskla fjasdkl"
+                <CardInfo
+                  bgColor='#fff'
+                  size={80}
+                  title='Trafico pesado en la regional'
+                  info='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat magni velit iste, voluptatum veritatis sequi repudiandae, error sunt, consectetur laudantium impedit est cumque eveniet eligendi illum blanditiis autem. Quis, eius.'
+                  containerBorder='#00AA37'
+                  colorTitle='#00AA37'
                   onPress={() => this.setState({ infoNotification: true })}
                 />
-                <Card
-                  color="#f09209"
-                  name="Juan"
-                  category="Maestros"
-                  cantPersons="1"
+                <CardInfo
+                  bgColor='#fff'
+                  size={80}
+                  title='Pico y placa ambiental'
+                  info='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat magni velit iste, voluptatum veritatis sequi repudiandae, error sunt, consectetur laudantium impedit est cumque eveniet eligendi illum blanditiis autem. Quis, eius.'
+                  containerBorder='#FF8C01'
+                  colorTitle='#FF8C01'
                   onPress={() => this.setState({ infoNotification: true })}
-                  description="Holas"
                 />
-                <Card
-                  color="#f09209"
-                  name="Juan"
-                  category="Maestros"
-                  cantPersons="1"
-                  description="Holas"
+                <CardInfo
+                  bgColor='#fff'
+                  size={80}
+                  title='Pico y placa ambiental'
+                  info='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat magni velit iste, voluptatum veritatis sequi repudiandae, error sunt, consectetur laudantium impedit est cumque eveniet eligendi illum blanditiis autem. Quis, eius.'
+                  containerBorder='#FF8C01'
+                  colorTitle='#FF8C01'
+                  onPress={() => this.setState({ infoNotification: true })}
                 />
-                <Card
-                  color="#f09209"
-                  name="Juan"
-                  category="Maestros"
-                  cantPersons="1"
-                  description="Holas"
+                <CardInfo
+                  bgColor='#fff'
+                  size={80}
+                  title='Pico y placa ambiental'
+                  info='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat magni velit iste, voluptatum veritatis sequi repudiandae, error sunt, consectetur laudantium impedit est cumque eveniet eligendi illum blanditiis autem. Quis, eius.'
+                  containerBorder='#FF8C01'
+                  colorTitle='#FF8C01'
+                  onPress={() => this.setState({ infoNotification: true })}
                 />
-                <Card
-                  color="#f09209"
-                  name="Juan"
-                  category="Maestros"
-                  cantPersons="1"
-                  description="Holas"
+                <CardInfo
+                  bgColor='#fff'
+                  size={80}
+                  title='Pico y placa ambiental'
+                  info='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat magni velit iste, voluptatum veritatis sequi repudiandae, error sunt, consectetur laudantium impedit est cumque eveniet eligendi illum blanditiis autem. Quis, eius.'
+                  containerBorder='#FF8C01'
+                  colorTitle='#FF8C01'
+                  onPress={() => this.setState({ infoNotification: true })}
                 />
+
               </ScrollView>
             </View>
           </Row>
@@ -101,7 +110,7 @@ const Styles = StyleSheet.create({
     maxWidth: "100%"
   },
   listBody: {
-    paddingTop: "3%",
+    padding: 16,
     minWidth: "100%",
     maxHeight: "100%"
   },
