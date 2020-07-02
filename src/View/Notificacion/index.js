@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  View,
-  FlatList,
-  SafeAreaView,
-  Text,
-  ActivityIndicator,
-  StyleSheet,
-  ScrollView
-} from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 
 //Responsive
 import { Grid, Col, Row } from "react-native-easy-grid";
@@ -16,6 +8,8 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import Notification from "../../Components/Notification/Notification";
 import Card from "../../Components/cards/card";
 import { TitlesTop } from '../../Components/titles/titlesTop';
+
+import Logo from '../../resources/img/LogoSENA-naranja_vector.png'
 
 export default class Notificaciones extends Component {
   constructor() {
@@ -31,7 +25,7 @@ export default class Notificaciones extends Component {
     return (
       <Grid>
         <Col size={1}>
-              <TitlesTop title='Noticias' bgColor='#FF8C01' widthSize='50%' txtColor='#fff' />
+          <TitlesTop title='Noticias' bgColor='#FF8C01' widthSize='50%' txtColor='#fff' />
           <Row size={3}>
             <View style={Styles.bodyNotifications}>
 
@@ -79,7 +73,9 @@ export default class Notificaciones extends Component {
 
           {this.state.infoNotification ?
             <View style={Styles.solicitude}>
-              <Notification infoView={() => this.setState({ infoNotification: false })} />
+              <Notification
+                img={Logo}
+                infoView={() => this.setState({ infoNotification: false })} />
             </View> : null
 
           }

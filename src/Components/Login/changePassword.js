@@ -81,7 +81,7 @@ class ChangePassword extends Component {
           <Col size={1}>
             <View style={{display:'flex', justifyContent:'space-around', alignItems: "center", minHeight: "75%" }}>
               {/* <View>
-                <Image source={require('../../../resources/img/logoInicio/LogoSENA-naranja_vector.png')} style={{ width: 200, height: 200, resizeMode: 'cover' }} />
+                <Image source={require('../../../resources/img/LogoSENA-naranja_vector.png')} style={{ width: 200, height: 200, resizeMode: 'cover' }} />
               </View> */}
               <View >
                 <Input

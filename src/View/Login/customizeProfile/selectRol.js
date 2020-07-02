@@ -78,7 +78,7 @@ class SelectRol extends Component {
               />
               <View style={styles.contSec1}>
                 <View style={styles.contImg}>
-                  <Image source={require('../../../resources/img/logoInicio/LogoSENA-naranja_vector.png')} style={styles.imageTop} />
+                  <Image source={require('../../../resources/img/LogoSENA-naranja_vector.png')} style={styles.imageTop} />
                 </View>
                 <View style={styles.contText}>
                   <Text style={styles.text}>

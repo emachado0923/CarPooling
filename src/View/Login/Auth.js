@@ -155,7 +155,7 @@ class Auth extends Component {
             >
               <View>
                 <Image
-                  source={require("../../resources/img/logoInicio/LogoSENA-naranja_vector.png")}
+                  source={require("../../resources/img/LogoSENA-naranja_vector.png")}
                   style={keyboard ? imageHeight1 : imageHeight2}
                 />
               </View>

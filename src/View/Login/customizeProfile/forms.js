@@ -102,7 +102,7 @@ class Forms extends Component {
                 <ScrollView >
                     <View style={styles.contentCards}>
                         <View>
-                            <Image source={require('../../../resources/img/logoInicio/LogoSENA-naranja_vector.png')} style={{ width: 200, height: 200, resizeMode: 'cover' }} />
+                            <Image source={require('../../../resources/img/LogoSENA-naranja_vector.png')} style={{ width: 200, height: 200, resizeMode: 'cover' }} />
                         </View>
                         <Card
                             color="#f09209"
