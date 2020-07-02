@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
-export const Button = ({ onPress, title, bgColor, colorText, widthSize, fontSize, borderColor,borderWidth }) => {
+export const Button = ({ onPress, title, bgColor, colorText, widthSize, fontSize, borderColor,borderWidth, fontWeight }) => {
   return (
     <View style={{ flexDirection: "row" }}>
       <TouchableOpacity
@@ -22,7 +22,8 @@ export const Button = ({ onPress, title, bgColor, colorText, widthSize, fontSize
           style={{
             color: colorText || "black",
             fontSize: fontSize || 14,
-            textAlign:'center'
+            textAlign:'center',
+            fontWeight: fontWeight || 'normal'
           }}
         >
           {title}

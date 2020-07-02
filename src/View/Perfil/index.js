@@ -8,8 +8,8 @@ import { Grid, Row, Col } from "react-native-easy-grid";
 import { ButtonMenu } from "../../Components/common/ButtonMenu";
 import { ScrollView } from "react-native-gesture-handler";
 import { TitlesTop } from "../../Components/titles/titlesTop";
-import Card from "../../Components/cards/card";
 import CardInfo from "../../Components/cards/CardInfo";
+import {Button} from '../../Components/common/Button';
 
 class Perfil extends Component {
     constructor(props) {
@@ -95,6 +95,16 @@ class Perfil extends Component {
                     : null
                     }
                 </Col>
+                <Col style={{alignItems:'center', marginVertical:20}}>
+                    <Button
+                     title='Editar'
+                     borderWidth={2}
+                     borderColor='#00AA37'
+                     fontSize={20}
+                     colorText='#00AA37'
+                     fontWeight='bold'
+                    />
+                </Col>
             </ScrollView>
         );
     }
@@ -111,6 +121,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 8,
+        textAlign:'center'
     },
     img: {
         width: 120,

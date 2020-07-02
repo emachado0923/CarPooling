@@ -48,14 +48,14 @@ class Register extends Component {
                 contraseña: '',
                 profile: '',
                 marca: '',
-                modelo: '',
+                color: '',
                 placa: ''
             }} onSubmit={values => this.registrarUsuario(values)}
                     validationSchema={
                         yup.object().shape({
 
-                            nombre: yup.string().required('El nombre es obligatorio!').min(7, 'El nombre debe tener más de 7 caracteres!').max(40, 'Por favor ingrese no más de 40 caracteres'),
-                            apellido: yup.string().required('El apellido es obligatorio!').min(7, 'El apellido debe tener más de 7 caracteres!').max(40, 'Por favor ingrese no más de 40 caracteres'),
+                            nombre: yup.string().required('El nombre es obligatorio!').min(3, 'El nombre debe tener más de 3 caracteres!').max(40, 'Por favor ingrese no más de 40 caracteres'),
+                            apellido: yup.string().required('El apellido es obligatorio!').min(3, 'El apellido debe tener más de 3 caracteres!').max(40, 'Por favor ingrese no más de 40 caracteres'),
                             correo: yup.string().required('El correo es obligatorio!').email('Direccion de correo invalida!').matches(/(misena.edu.co$|sena.edu.co$)/, 'Solo se permiten correos sena'),
                             centro: yup.string().required('El centro es obligatorio!'),
                             dirección: yup.string().required('La dirección es obligatoria!').min(7, 'La direccion debe tener más de 7 caracteres!'),
@@ -65,8 +65,8 @@ class Register extends Component {
                             marca: yup.string().when('profile', {
                                 is: 'CONDUCTOR', then: yup.string().required('La marca es obligatoria!')
                             }),
-                            modelo: yup.string().when('profile', {
-                                is: 'CONDUCTOR', then: yup.string().required('El modelo es obligatorio!'),
+                            color: yup.string().when('profile', {
+                                is: 'CONDUCTOR', then: yup.string().required('El color es obligatorio!'),
                             }),
 
                             placa: yup.string().when('profile', {
@@ -278,8 +278,8 @@ class Register extends Component {
                                                     </Text>
                                                     }
                                                     <Input
-                                                        label='Modelo'
-                                                        placeholder='Ingresa el modelo de tu vehículo'
+                                                        label='Color'
+                                                        placeholder='Ingresa el color de tu vehículo'
                                                         labelColor='#00AA37'
                                                         labelSize={20}
                                                         fontInputSize={20}
@@ -289,13 +289,13 @@ class Register extends Component {
                                                             vehiculo.modelo = value
                                                             this.setState({vehiculo})
                                                         }}*/
-                                                        onBlur={handleBlur('modelo')}
-                                                        onChangeText={handleChange('modelo')}
-                                                        values={values.modelo}
+                                                        onBlur={handleBlur('color')}
+                                                        onChangeText={handleChange('color')}
+                                                        values={values.color}
                                                     />
-                                                    {touched.modelo && errors.modelo &&
+                                                    {touched.color && errors.color &&
                                                     <Text style={{fontSize: 15, color: 'red'}}>
-                                                        <Icon name={'exclamation-circle'} size={20}/> {errors.modelo}
+                                                        <Icon name={'exclamation-circle'} size={20}/> {errors.color}
                                                     </Text>
                                                     }
                                                     <Input
