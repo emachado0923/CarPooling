@@ -19,7 +19,7 @@ export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry
     margin: 0,
     padding: 2,
     fontSize: labelSize || 16,
-    fontWeight: labelWeight
+    fontWeight: labelWeight || 'bold'
   }
   return (
     <View style={{
