@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import Card from '../../Components/cards/card';
-import Title from '../../Components/titles/titles';
+import { TitlesTop } from '../../Components/titles/titlesTop';
+
 
 export default class MisGrupos extends Component {
     constructor() {
@@ -10,6 +11,9 @@ export default class MisGrupos extends Component {
             data2: [
                 { nombreGrupo: 'Jillian aaa', categoriaGrupo: 'bici', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
                 { nombreGrupo: 'Jimmy aaa', categoriaGrupo: 'moto', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
+                { nombreGrupo: 'Julie aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
+                { nombreGrupo: 'Julie aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
+                { nombreGrupo: 'Julie aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
                 { nombreGrupo: 'Julie aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
                 { nombreGrupo: 'Julie aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
                 { nombreGrupo: 'Julie aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
@@ -30,7 +34,7 @@ export default class MisGrupos extends Component {
     render() {
         return (
             <View style={styles.content} >
-                <Title colorBorder="#59b548" colorBg="#fff" colorText="#238276" title="mis grupos" />
+                <TitlesTop title='MIS GRUPOS' txtColor='#fff' borderRadius={12} bgColor='#FF8C01' widthSize='50%'/>
                 <ScrollView style={styles.contentMyGroups}>
                     {this.misGrupos()}
                 </ScrollView>
@@ -43,39 +47,7 @@ const styles = StyleSheet.create({
     content: {
         flex: 1
     },
-    grupos: {
-        marginTop: 10,
-        borderWidth: 1,
-        borderBottomRightRadius: 10,
-        borderTopRightRadius: 10,
-        borderColor: "#59b548",
-        backgroundColor: "#59b548",
-        padding: 10,
-        fontSize: 20,
-        maxWidth: 150,
-        width: 150,
-        color: "#fff",
-        marginBottom: 10,
-        textAlign: "center"
-    },
-    misgrupos: {
-        borderWidth: 1,
-        borderBottomRightRadius: 10,
-        borderTopRightRadius: 10,
-        borderColor: "#59b548",
-        backgroundColor: "#fff",
-        padding: 10,
-        fontSize: 20,
-        maxWidth: 150,
-        width: 150,
-        color: "#238276",
-        marginBottom: 10,
-        textAlign: "center"
-    },
-    contentGroups: {
-        flex: 1,
-    },
     contentMyGroups: {
-        flex: 1
+        marginTop:12,
     }
 });
