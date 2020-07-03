@@ -66,7 +66,6 @@ class Auth extends Component {
     await API.POST(`/login`, { correo, contraseña })
       .then(({ data }) => {
         if (data.ok) {
-          console.log('esto es data desde login --->', data)
           this.props.saveJWT("token", data.token);
           this.props.actualizar_jwt(data.token);
           this.props.update_user(data.login[0]);
@@ -102,10 +101,8 @@ class Auth extends Component {
   }
   handle() {
     let windowHeight = Dimensions.get("window").height;
-    // console.log("Entra");
     console.log(_touchY._value);
     let deviceHeight = -(windowHeight / 2)
-    // console.log(-(windowHeight/2));
     if (deviceHeight >= _touchY._value) {
       console.log("Mayor");
       this.setState({
@@ -134,7 +131,6 @@ class Auth extends Component {
 
   render() {
     const { correo, contraseña, error, loading, keyboard, ola } = this.state;
-    // console.log("123123", ola);
 
     const { errorTextStyle, containerStyle } = styles;
     const imageHeight1 = { width: 100, height: 100, resizeMode: "cover" };

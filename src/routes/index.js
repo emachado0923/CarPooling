@@ -3,12 +3,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Forms from '../View/Login/customizeProfile/forms';
-import SelectRol from '../View/Login/customizeProfile/selectRol';
-import DataPersonal from '../Components/Login/customizeProfile/dataPersonal';
-import DataCenter from '../Components/Login/customizeProfile/dataCenter';
-import DataCar from '../Components/Login/customizeProfile/dataCar';
-import ChangePassword from '../Components/Login/changePassword';
 import Register from '../View/Login/Register';
 import Auth from '../View/Login/Auth';
 import Grupos from '../View/Grupos';
@@ -26,12 +20,6 @@ export default function App({ View }) {
       <Stack.Navigator initialRouteName={View}>
         <Stack.Screen name='Auth' component={Auth} options={{ headerShown: false }} />
         <Stack.Screen name='Register' component={Register} options={{ headerShown: false }} />
-        <Stack.Screen name='ChangePassword' component={ChangePassword} options={{ headerShown: false }} />
-        <Stack.Screen name='DataCar' component={DataCar} options={{ headerShown: false }} />
-        <Stack.Screen name='DataCenter' component={DataCenter} options={{ headerShown: false }} />
-        <Stack.Screen name='DataPersonal' component={DataPersonal} options={{ headerShown: false }} />
-        <Stack.Screen name='SelectRol' component={SelectRol} options={{ headerShown: false }} />
-        <Stack.Screen name='Forms' component={Forms} options={{ headerShown: false }} />
         <Stack.Screen name='MyTabs' component={MyTabs} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
