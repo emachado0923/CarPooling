@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
-import Card from '../../Components/cards/card';
-import {TitlesTop} from '../../Components/titles/titlesTop';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import Card from '../../../Components/cards/card';
+import {TitlesTop} from '../../../Components/titles/titlesTop';
 
 export default class GruposTodos extends Component {
     constructor() {

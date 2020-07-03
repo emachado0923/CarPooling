@@ -28,7 +28,7 @@ class Inicio extends Component {
       return <AppNavigation View='MyTabs' />
     } else if (this.props.jwt) {
       if (this.props.user.profile == "ninguno") {
-        return <AppNavigation View='SelectRol' />
+        return <AppNavigation View='Auth' />
       } else {
         return <AppNavigation View='MyTabs' />
       }
