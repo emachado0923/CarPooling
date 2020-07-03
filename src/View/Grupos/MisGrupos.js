@@ -1,33 +1,12 @@
 import React, { Component } from 'react';
-import TabGrupos from '../../routes/NavGrupos';
-
-export default class Grupos extends Component{
-    render(){
-        return(
-            <TabGrupos></TabGrupos>
-        )
-    }
-}
-
-
-/* import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Card from '../../Components/cards/card';
 import Title from '../../Components/titles/titles';
 
-export default class Grupos extends Component {
+export default class MisGrupos extends Component {
     constructor() {
         super();
         this.state = {
-            data1: [
-                { nombreGrupo: 'Devin aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
-                { nombreGrupo: 'Dan aaa', categoriaGrupo: 'moto', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
-                { nombreGrupo: 'Dominic aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
-                { nombreGrupo: 'Dominic aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
-                { nombreGrupo: 'Dominic aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
-                { nombreGrupo: 'Dominic aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
-                { nombreGrupo: 'Dominic aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
-            ],
             data2: [
                 { nombreGrupo: 'Jillian aaa', categoriaGrupo: 'bici', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
                 { nombreGrupo: 'Jimmy aaa', categoriaGrupo: 'moto', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
@@ -37,15 +16,6 @@ export default class Grupos extends Component {
                 { nombreGrupo: 'Julie aaa', categoriaGrupo: 'carro', cantPers: 4, descripcion: "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure" },
             ]
         }
-    }
-
-    grupos() {
-        return (this.state.data1.map((e, i) =>
-            <Card key={i} color="#f09209" 
-                name={e.nombreGrupo} category={e.categoriaGrupo}
-                cantPersons={e.cantPers} description={e.descripcion}
-            />
-        ));
     }
 
     misGrupos() {
@@ -60,11 +30,6 @@ export default class Grupos extends Component {
     render() {
         return (
             <View style={styles.content} >
-                <Title colorBorder="#59b548" colorBg="#59b548" colorText="#fff" title="Grupos" />
-                <ScrollView style={styles.contentGroups}>
-                    {this.grupos()}
-                </ScrollView>
-
                 <Title colorBorder="#59b548" colorBg="#fff" colorText="#238276" title="mis grupos" />
                 <ScrollView style={styles.contentMyGroups}>
                     {this.misGrupos()}
@@ -114,4 +79,3 @@ const styles = StyleSheet.create({
         flex: 1
     }
 });
- */
