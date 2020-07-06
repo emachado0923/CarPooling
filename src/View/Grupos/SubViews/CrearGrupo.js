@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { Col } from "react-native-easy-grid";
 import { TitlesTop } from '../../../Components/titles/titlesTop';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Input, Button } from '../../../Components/common';
