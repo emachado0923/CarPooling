@@ -16,7 +16,8 @@ export const ButtonMenu = ({ onPress, title, colorText, fontSize, iconColor, ico
         style={{
           color: colorText || '#000',
           fontSize: fontSize || 18,
-          paddingRight: 8
+          paddingRight: 8,
+          fontWeight: 'bold'
         }}
       >
         {title}
