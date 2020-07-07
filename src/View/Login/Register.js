@@ -17,7 +17,7 @@ import * as yup from 'yup'
 
 class Register extends Component {
     constructor(props) {
-        super()
+        super(props)
         this.state = {
             vehiculo: {}
         }
@@ -36,7 +36,7 @@ class Register extends Component {
     }
 
     render() {
-        const { profile } = this.state;
+        // const { profile } = this.state;
         return (
 
             <Formik initialValues={{
@@ -44,15 +44,18 @@ class Register extends Component {
                 apellido: '',
                 tipo_doc: '',
                 numero_doc: '',
-                celular:'',
+                celular: '',
                 correo: '',
                 centro: '',
                 dirección: '',
                 contraseña: '',
                 profile: '',
-                marca: '',
-                color: '',
-                placa: ''
+                vehiculo: {
+                    marca: '',
+                    color: '',
+                    placa: ''
+                }
+
             }} onSubmit={values => this.registrarUsuario(values)}
                 validationSchema={
                     yup.object().shape({
@@ -299,7 +302,7 @@ class Register extends Component {
                                                     </Text>
                                                 }
                                             </View>
-                                            {profile == 'CONDUCTOR' && values.profile == 'CONDUCTOR' ?
+                                            {values.profile == 'CONDUCTOR' ?
                                                 <View style={styles.formDataCar}>
                                                     <TitlesTop
                                                         title='LLENA LA INFORMACIÓN DE TU VEHÍCULO'
@@ -318,18 +321,12 @@ class Register extends Component {
                                                         labelSize={20}
                                                         fontInputSize={20}
                                                         borderBottomColor='#00AA37'
-
-                                                        /*onChangeText={(value) => {
-                                                            let {vehiculo} = this.state;
-                                                            vehiculo.marca = value
-                                                            this.setState({vehiculo})
-                                                        }}*/
                                                         onBlur={handleBlur('marca')}
                                                         onChangeText={handleChange('marca')}
-                                                        values={values.marca}
+                                                        values={values.vehiculo.marca}
 
                                                     />
-                                                    {touched.marca && errors.marca &&
+                                                    {touched.vehiculo.marca && errors.marca &&
                                                         <Text style={{ fontSize: 15, color: 'red' }}>
                                                             <Icon name={'exclamation-circle'} size={20} /> {errors.marca}
                                                         </Text>
@@ -341,16 +338,11 @@ class Register extends Component {
                                                         labelSize={20}
                                                         fontInputSize={20}
                                                         borderBottomColor='#00AA37'
-                                                        /*onChangeText={(value) => {
-                                                            let {vehiculo} = this.state;
-                                                            vehiculo.modelo = value
-                                                            this.setState({vehiculo})
-                                                        }}*/
                                                         onBlur={handleBlur('color')}
                                                         onChangeText={handleChange('color')}
-                                                        values={values.color}
+                                                        values={values.vehiculo.color}
                                                     />
-                                                    {touched.color && errors.color &&
+                                                    {touched.vehiculo.color && errors.color &&
                                                         <Text style={{ fontSize: 15, color: 'red' }}>
                                                             <Icon name={'exclamation-circle'} size={20} /> {errors.color}
                                                         </Text>
@@ -362,24 +354,18 @@ class Register extends Component {
                                                         labelSize={20}
                                                         fontInputSize={20}
                                                         borderBottomColor='#00AA37'
-
-                                                        /*onChangeText={(value) => {
-                                                            let {vehiculo} = this.state;
-                                                            vehiculo.placa = value
-                                                            this.setState({vehiculo})
-                                                        }}*/
                                                         onBlur={handleBlur('placa')}
                                                         onChangeText={handleChange('placa')}
-                                                        values={values.placa}
+                                                        values={values.vehiculo.placa}
                                                     />
-                                                    {touched.placa && errors.placa &&
+                                                    {touched.vehiculo.placa && errors.placa &&
                                                         <Text style={{ fontSize: 15, color: 'red' }}>
                                                             <Icon name={'exclamation-circle'} size={20} /> {errors.placa}
                                                         </Text>
                                                     }
 
                                                 </View>
-                                                : profile == 'PASAJERO' && values.profile == 'PASAJERO' ?
+                                                : values.profile == 'PASAJERO' ?
                                                     <View style={styles.formDataCar}>
                                                         <Text style={styles.textPasajero}>
                                                             SELECCIONASTE EL ROL DE PASAJERO, YA TE PUEDES REGISTRAR.
