@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { connect } from "react-redux";
 import { deleteJWT } from "../../redux/actions/services";
 import { Grid, Row, Col } from "react-native-easy-grid";
@@ -11,11 +11,17 @@ import { TitlesTop } from "../../Components/titles/titlesTop";
 import CardInfo from "../../Components/cards/CardInfo";
 import { Button } from '../../Components/common/Button';
 
+// Image Picker
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
+
 class Perfil extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            estado: true
+            estado: true,
+            image: null,
         };
     }
 
@@ -27,11 +33,20 @@ class Perfil extends Component {
     }
 
     render() {
+        let { image } = this.state;
         return (
             <ScrollView style={styles.container}>
                 <Row style={styles.contaSec1}>
                     <Col style={styles.contImg}>
-                        <View style={styles.img} />
+                        <View style={styles.img}>
+
+                            {image && <Image source={{ uri: image }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />}
+                            {
+                                this.state.image === null ?
+                                    <Button title='Seleccionar una foto' bgColor='transparent' widthSize='90%' colorText='#707070' fontSize={16} onPress={this._pickImage} />
+                                    : null
+                            }
+                        </View>
                         <Text style={styles.txt}>{this.props.user.nombre} {this.props.user.apellido}</Text>
                     </Col>
                     <Col style={styles.contPrincipalInfo}>
@@ -99,7 +114,7 @@ class Perfil extends Component {
                         colorTitle='#FF8C01'
                         info={this.props.user.centro}
                     />
-                    
+
                     {
                         this.props.user.profile === 'CONDUCTOR' ?
                             <CardInfo
@@ -127,6 +142,37 @@ class Perfil extends Component {
             </ScrollView>
         );
     }
+    componentDidMount() {
+        this.getPermissionAsync();
+    }
+
+    getPermissionAsync = async () => {
+        if (Constants.platform.ios) {
+            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+            if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+            }
+        }
+    };
+
+    _pickImage = async () => {
+        try {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: false,
+                aspect: [4, 3],
+                quality: 1,
+            });
+            if (!result.cancelled) {
+                this.setState({ image: result.uri });
+                console.log(this.state.image)
+            }
+
+            console.log(result);
+        } catch (E) {
+            console.log('error', E);
+        }
+    };
 }
 const styles = StyleSheet.create({
     container: {
@@ -147,7 +193,10 @@ const styles = StyleSheet.create({
         height: 120,
         borderRadius: 100,
         borderColor: '#00AA37',
-        borderWidth: 2
+        borderWidth: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden',
     },
     contPrincipalInfo: {
         justifyContent: 'center',
