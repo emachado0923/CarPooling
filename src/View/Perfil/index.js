@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
-import { connect } from "react-redux";
-import { deleteJWT } from "../../redux/actions/services";
-import { Grid, Row, Col } from "react-native-easy-grid";
+import React, {Component} from "react";
+import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
+import {connect} from "react-redux";
+import {deleteJWT} from "../../redux/actions/services";
+import {Grid, Row, Col} from "react-native-easy-grid";
 
 // Componentes
-import { ButtonMenu } from "../../Components/common/ButtonMenu";
-import { ScrollView } from "react-native-gesture-handler";
-import { TitlesTop } from "../../Components/titles/titlesTop";
+import {ButtonMenu} from "../../Components/common/ButtonMenu";
+import {ScrollView} from "react-native-gesture-handler";
+import {TitlesTop} from "../../Components/titles/titlesTop";
 import CardInfo from "../../Components/cards/CardInfo";
-import { Button } from '../../Components/common/Button';
+import {Button} from '../../Components/common/Button';
 
 // Image Picker
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
+
 
 class Perfil extends Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class Perfil extends Component {
         };
     }
 
+
     actualizar_jwt() {
         const token = this.props.delJWT();
         if (token) {
@@ -33,24 +35,32 @@ class Perfil extends Component {
     }
 
     render() {
-        let { image } = this.state;
+        let {image} = this.state;
         return (
             <ScrollView style={styles.container}>
                 <Row style={styles.contaSec1}>
                     <Col style={styles.contImg}>
                         <View style={styles.img}>
 
-                            {image && <Image source={{ uri: image }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />}
+                            {image &&
+
+                            <Image source={{uri: image}} style={{width: '100%', height: '100%', resizeMode: 'cover'}}/>}
+
                             {
-                                this.state.image === null ?
-                                    <Button title='Seleccionar una foto' bgColor='transparent' widthSize='90%' colorText='#707070' fontSize={16} onPress={this._pickImage} />
-                                    : null
-                            }
+                                this.props.user.foto === null || this.props.user.foto === "" && this.state.image === null ?
+                                    <Button title='Seleccionar una foto' bgColor='transparent' widthSize='90%'
+                                            colorText='#707070' fontSize={16} onPress={this._pickImage}/>
+                                    : (
+                                        <Image style={{width: '100%', height: '100%', resizeMode: 'cover'}}
+                                               source={{uri: `http://192.168.1.58:3000/${this.props.user.foto}`}}/>
+                                    )}{/*Solo es cambiar la ip*/}
+
                         </View>
                         <Text style={styles.txt}>{this.props.user.nombre} {this.props.user.apellido}</Text>
                     </Col>
                     <Col style={styles.contPrincipalInfo}>
                         <Text style={styles.txt}>{this.props.user.profile}</Text>
+
                         <Text style={styles.txt}>2029 puntos</Text>
                         <ButtonMenu
                             onPress={this.actualizar_jwt.bind(this)}
@@ -69,6 +79,8 @@ class Perfil extends Component {
                     txtColor='#fff'
                 />
                 <Col style={styles.contMoreInfo}>
+
+
                     <CardInfo
                         size={60}
                         iconName='address-card'
@@ -116,20 +128,48 @@ class Perfil extends Component {
                     />
 
                     {
-                        this.props.user.profile === 'CONDUCTOR' ?
-                            <CardInfo
-                                size={60}
-                                iconName='building'
-                                iconSize={28}
-                                iconColor='#FF8C01'
-                                title='Vehículo'
-                                colorTitle='#FF8C01'
-                                info={this.props.user.vehiculo}
-                            />
-                            : null
+                        this.props.user.profile === 'CONDUCTOR' ? (
+                            <View>
+                                <TitlesTop
+                                    title='INFORMACIÓN DE TU VEHICULO'
+                                    widthSize='80%'
+                                    bgColor="#FF8C01"
+                                    txtColor='#fff'
+                                />
+                                <Col style={styles.contMoreInfo}>
+                                    <CardInfo
+                                        size={60}
+                                        iconName='car'
+                                        iconSize={28}
+                                        iconColor='#5a5a5a'
+                                        title='Marca del Vehiculo'
+                                        colorTitle='#FF8C01'
+                                        info={this.props.user.vehiculo.marca}
+                                    />
+                                    <CardInfo
+                                        size={60}
+                                        iconName='tint'
+                                        iconSize={28}
+                                        iconColor='#5a5a5a'
+                                        title='Color del Vehiculo'
+                                        colorTitle='#FF8C01'
+                                        info={this.props.user.vehiculo.color}
+                                    />
+                                    <CardInfo
+                                        size={60}
+                                        iconName='address-card'
+                                        iconSize={28}
+                                        iconColor='#5a5a5a'
+                                        title='Placa del Vehiculo'
+                                        colorTitle='#FF8C01'
+                                        info={this.props.user.vehiculo.placa}
+                                    />
+                                </Col>
+                            </View>
+                        ) : null
                     }
                 </Col>
-                <Col style={{ alignItems: 'center', marginVertical: 20 }}>
+                <Col style={{alignItems: 'center', marginVertical: 20}}>
                     <Button
                         title='Editar'
                         borderWidth={2}
@@ -137,18 +177,20 @@ class Perfil extends Component {
                         fontSize={20}
                         colorText='#00AA37'
                         fontWeight='bold'
+                        onPress={() => this.props.navigation.navigate('ModificarPerfil')}
                     />
                 </Col>
             </ScrollView>
         );
     }
+
     componentDidMount() {
         this.getPermissionAsync();
     }
 
     getPermissionAsync = async () => {
         if (Constants.platform.ios) {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+            const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
             if (status !== 'granted') {
                 alert('Sorry, we need camera roll permissions to make this work!');
             }
@@ -164,19 +206,20 @@ class Perfil extends Component {
                 quality: 1,
             });
             if (!result.cancelled) {
-                this.setState({ image: result.uri });
+                this.setState({image: result.uri});
+
                 console.log(this.state.image)
+
             }
 
-            console.log(result);
         } catch (E) {
             console.log('error', E);
         }
     };
 }
+
 const styles = StyleSheet.create({
-    container: {
-    },
+    container: {},
     contaSec1: {
         flex: 1,
         backgroundColor: '#E0E0E0',
@@ -211,7 +254,6 @@ const styles = StyleSheet.create({
         paddingTop: 20
     },
 })
-
 
 
 const mapStateToProps = state => {

@@ -1,4 +1,4 @@
-import { API, URL_API } from '../../API/comunicacionApi';
+import {API, URL_API} from '../../API/comunicacionApi';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const JWT = 'JWT';
@@ -30,20 +30,24 @@ export const error = err => ({
 
 export const saveKey = (key, value) => async dispatch => {
     try {
+
         await AsyncStorage.setItem(key, value);
+
     } catch (error) {
         dispatch(error('AsyncStorage Error: ' + error.message));
     }
 }
 
 export const loadJWT = () => async dispatch => {
+
     try {
         const value = await AsyncStorage.getItem('token');
         if (value !== null) {
-            await API.AUTH(`/validation/token`,value).then(({data})=>{
+            await API.AUTH(`/validation/token`, value).then(({data}) => {
                 dispatch(jwt(value))
                 dispatch(user(data));
             })
+
         }
         dispatch(cargando(false))
     } catch (error) {
