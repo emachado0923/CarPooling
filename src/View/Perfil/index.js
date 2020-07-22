@@ -34,6 +34,17 @@ class Perfil extends Component {
         }
     }
 
+    modificarPerfil = () => {
+        if (this.props.user.profile === 'CONDUCTOR') {
+            this.props.navigation.navigate('ModificarConductor')
+        }
+        if (this.props.user.profile === 'PASAJERO') {
+            this.props.navigation.navigate('ModificarPasajero')
+        }
+
+
+    }
+
     render() {
         let {image} = this.state;
         return (
@@ -177,7 +188,7 @@ class Perfil extends Component {
                         fontSize={20}
                         colorText='#00AA37'
                         fontWeight='bold'
-                        onPress={() => this.props.navigation.navigate('ModificarPerfil')}
+                        onPress={this.modificarPerfil}
                     />
                 </Col>
             </ScrollView>

@@ -7,7 +7,8 @@ import Register from '../View/Login/Register';
 import Auth from '../View/Login/Auth';
 import Grupos from '../View/Grupos';
 import Perfil from '../View/Perfil';
-import ModificarPerfil from '../View/Perfil/Modificar/modificarPerfil';
+import ModificarConductor from '../View/Perfil/Modificar/modificarConductor';
+import ModificarPasajero from '../View/Perfil/Modificar/modificarPasajero';
 import Viajes from '../View/Viajes';
 import Notificaciones from '../View/Notificacion';
 import Inicio from '../View/Inicio';
@@ -22,7 +23,8 @@ export default function App({View}) {
                 <Stack.Screen name='Auth' component={Auth} options={{headerShown: false}}/>
                 <Stack.Screen name='Register' component={Register} options={{headerShown: false}}/>
                 <Stack.Screen name='MyTabs' component={MyTabs} options={{headerShown: false}}/>
-                <Stack.Screen name='ModificarPerfil' component={ModificarPerfil} options={{headerShown: false}}/>
+                <Stack.Screen name='ModificarConductor' component={ModificarConductor} options={{headerShown: false}}/>
+                <Stack.Screen name='ModificarPasajero' component={ModificarPasajero} options={{headerShown: false}}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

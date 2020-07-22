@@ -8,7 +8,7 @@ import {Button, Input} from "../../../Components/common";
 import Axios from "axios";
 import {API} from "../../../API/comunicacionApi";
 
-class ModificarPerfil extends Component {
+class ModificarPasajero extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,9 +21,7 @@ class ModificarPerfil extends Component {
             correo: this.props.user.correo,
             dirección: this.props.user.dirección,
             centro: this.props.user.centro,
-            marca: this.props.user.vehiculo.marca,
-            color: this.props.user.vehiculo.color,
-            placa: this.props.user.vehiculo.placa,
+
 
         }
     }
@@ -38,6 +36,7 @@ class ModificarPerfil extends Component {
     }
 
     render() {
+
         return (
             <ScrollView>
                 <TitlesTop
@@ -67,18 +66,6 @@ class ModificarPerfil extends Component {
                     <Input value={this.state.centro} label={'Centro'} editable={true}
                            onChangeText={(centro) => this.setState({centro})}/>
 
-
-                    {this.props.user.profile === 'CONDUCTOR' ? (
-                        <View>
-                            <Text>Modifique su vehiculo</Text>
-                            <Input value={this.state.marca} editable={true}
-                                   onChangeText={(marca) => this.setState({marca})}/>
-                            <Input value={this.state.color} editable={true}
-                                   onChangeText={(color) => this.setState({color})}/>
-                            <Input value={this.state.placa} editable={true}
-                                   onChangeText={(placa) => this.setState({placa})}/>
-                        </View>
-                    ) : null}
                 </Col>
                 <Col style={{alignItems: 'center', width: '100%'}}>
                     <Button title='Guardar' borderWidth={2}
@@ -86,7 +73,7 @@ class ModificarPerfil extends Component {
                             colorText='#00AA37' fontWeight='bold'
                             onPress={this._ModificarUsuario}
                     />
-                    <Button title={'Volver'} onPress={()=> this.props.navigation.navigate('Perfil')}/>
+                    <Button title={'Volver'} onPress={() => this.props.navigation.navigate('Perfil')}/>
                 </Col>
 
             </ScrollView>
@@ -141,4 +128,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps)(ModificarPerfil)
+export default connect(mapStateToProps)(ModificarPasajero)
