@@ -90,8 +90,6 @@ class Perfil extends Component {
                     txtColor='#fff'
                 />
                 <Col style={styles.contMoreInfo}>
-
-
                     <CardInfo
                         size={60}
                         iconName='address-card'
@@ -137,14 +135,14 @@ class Perfil extends Component {
                         colorTitle='#FF8C01'
                         info={this.props.user.centro}
                     />
-
+                </Col>
                     {
                         this.props.user.profile === 'CONDUCTOR' ? (
                             <View>
                                 <TitlesTop
                                     title='INFORMACIÓN DE TU VEHICULO'
                                     widthSize='80%'
-                                    bgColor="#FF8C01"
+                                    bgColor="#00AA37"
                                     txtColor='#fff'
                                 />
                                 <Col style={styles.contMoreInfo}>
@@ -154,7 +152,7 @@ class Perfil extends Component {
                                         iconSize={28}
                                         iconColor='#5a5a5a'
                                         title='Marca del Vehiculo'
-                                        colorTitle='#FF8C01'
+                                        colorTitle='#00AA37'
                                         info={this.props.user.vehiculo.marca}
                                     />
                                     <CardInfo
@@ -163,7 +161,7 @@ class Perfil extends Component {
                                         iconSize={28}
                                         iconColor='#5a5a5a'
                                         title='Color del Vehiculo'
-                                        colorTitle='#FF8C01'
+                                        colorTitle='#00AA37'
                                         info={this.props.user.vehiculo.color}
                                     />
                                     <CardInfo
@@ -172,21 +170,19 @@ class Perfil extends Component {
                                         iconSize={28}
                                         iconColor='#5a5a5a'
                                         title='Placa del Vehiculo'
-                                        colorTitle='#FF8C01'
+                                        colorTitle='#00AA37'
                                         info={this.props.user.vehiculo.placa}
                                     />
                                 </Col>
                             </View>
                         ) : null
                     }
-                </Col>
                 <Col style={{alignItems: 'center', marginVertical: 20}}>
                     <Button
                         title='Editar'
-                        borderWidth={2}
-                        borderColor='#00AA37'
+                        bgColor='#00AA37'
                         fontSize={20}
-                        colorText='#00AA37'
+                        colorText='#FFF'
                         fontWeight='bold'
                         onPress={this.modificarPerfil}
                     />

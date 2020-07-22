@@ -1,12 +1,12 @@
-import React, {Component} from "react";
-import {View, Text, StyleSheet, Image, TextInput} from "react-native";
-import {connect} from "react-redux";
-import {TitlesTop} from "../../../Components/titles/titlesTop";
-import {ScrollView} from "react-native-gesture-handler";
-import {Col} from "react-native-easy-grid";
-import {Button, Input} from "../../../Components/common";
+import React, { Component } from "react";
+import { View, Text, StyleSheet, Image, TextInput } from "react-native";
+import { connect } from "react-redux";
+import { TitlesTop } from "../../../Components/titles/titlesTop";
+import { ScrollView } from "react-native-gesture-handler";
+import { Col } from "react-native-easy-grid";
+import { Button, Input } from "../../../Components/common";
 import Axios from "axios";
-import {API} from "../../../API/comunicacionApi";
+import { API } from "../../../API/comunicacionApi";
 
 class ModificarPasajero extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class ModificarPasajero extends Component {
             correo: this.props.user.correo,
             dirección: this.props.user.dirección,
             centro: this.props.user.centro,
-
+            pass: this.props.user.contraseña,
 
         }
     }
@@ -40,40 +40,81 @@ class ModificarPasajero extends Component {
         return (
             <ScrollView>
                 <TitlesTop
-                    title={`Modificar ${this.props.user.profile}`}
+                    title={`EDITAR INFORMACIÓN DEL ${this.props.user.profile}`}
                     widthSize='80%'
                     bgColor="#FF8C01"
                     txtColor='#fff'
                 />
                 <Col style={styles.contMoreInfo}>
-                    <Input value={this.state.nombre} label='Nombre' editable={true}
-                           onChangeText={(nombre) => this.setState({nombre})}/>
-
-                    <Input value={this.state.apellido} label='Apellido' editable={true}
-                           onChangeText={(apellido) => this.setState({apellido})}/>
-
-
-                    <Input keyboardType={'phone-pad'} label='Celular' value={this.state.celular.toString()}
-                           editable={true} onChangeText={(celular) => this.setState({celular})}/>
-
-
-                    <Input value={this.state.correo} label='Correo electronico' editable={true}
-                           onChangeText={(correo) => this.setState({correo})}/>
-
-                    <Input value={this.state.dirección} label='Dirrección' editable={true}
-                           onChangeText={(dirección) => this.setState({dirección})}/>
-
-                    <Input value={this.state.centro} label={'Centro'} editable={true}
-                           onChangeText={(centro) => this.setState({centro})}/>
-
-                </Col>
-                <Col style={{alignItems: 'center', width: '100%'}}>
-                    <Button title='Guardar' borderWidth={2}
-                            borderColor='#00AA37' fontSize={20}
-                            colorText='#00AA37' fontWeight='bold'
-                            onPress={this._ModificarUsuario}
+                    <Input
+                        value={this.state.nombre}
+                        label='Nombre'
+                        editable={true}
+                        labelSize={20}
+                        labelColor='#FF8C01'
+                        onChangeText={(nombre) => this.setState({ nombre })}
                     />
-                    <Button title={'Volver'} onPress={() => this.props.navigation.navigate('Perfil')}/>
+                    <Input
+                        value={this.state.apellido}
+                        label='Apellido'
+                        labelSize={20}
+                        labelColor='#FF8C01'
+                        editable={true}
+                        onChangeText={(apellido) => this.setState({ apellido })}
+                    />
+                    <Input
+                        keyboardType={'phone-pad'}
+                        label='Celular'
+                        labelSize={20}
+                        labelColor='#FF8C01'
+                        value={this.state.celular.toString()}
+                        editable={true} onChangeText={(celular) => this.setState({ celular })}
+                    />
+                    <Input
+                        value={this.state.correo}
+                        label='Correo electronico'
+                        labelSize={20}
+                        labelColor='#FF8C01'
+                        editable={true}
+                        onChangeText={(correo) => this.setState({ correo })}
+                    />
+                    <Input
+                        value={this.state.dirección}
+                        label='Dirrección'
+                        labelSize={20}
+                        labelColor='#FF8C01'
+                        editable={true}
+                        onChangeText={(dirección) => this.setState({ dirección })}
+                    />
+                    <Input
+                        value={this.state.centro}
+                        label='Centro'
+                        labelSize={20}
+                        labelColor='#FF8C01'
+                        editable={true}
+                        onChangeText={(centro) => this.setState({ centro })}
+                    />
+                    <Input
+                        label='Contraseña'
+                        editable={true}
+                        labelSize={20}
+                        labelColor='#FF8C01'
+                        onChangeText={(pass) => this.setState({ pass })}
+                    />
+                </Col>
+                <Col style={{ alignItems: 'center', marginVertical: 12 }}>
+                    <Button title='Guardar' borderWidth={2}
+                        bgColor='#00AA37' fontSize={20}
+                        colorText='#fff' fontWeight='bold'
+                        onPress={this._ModificarUsuario}
+                    />
+                    <Button
+                        title='Volver'
+                        bgColor='#FF8C01'
+                        colorText='#FFF'
+                        fontSize={20}
+                        fontWeight='bold'
+                        onPress={() => this.props.navigation.navigate('Perfil')} />
                 </Col>
 
             </ScrollView>
