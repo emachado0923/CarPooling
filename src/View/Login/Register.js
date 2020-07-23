@@ -4,25 +4,26 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { TitlesTop } from '../../Components/titles/titlesTop';
 import { Input, Button } from '../../Components/common';
 import { API, URL_API } from '../../API/comunicacionApi';
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { Registro } from '../../redux/actions/configRegister';
 import { connect } from 'react-redux'
 import { ButtonSelect } from '../../Components/common/ButtonSelect';
 // Formik and yup
-import { Formik } from 'formik'
-import * as yup from 'yup'
+import { Formik } from 'formik';
+import * as yup from 'yup';
+
 
 
 class Register extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      vehiculo: {}
+      vehiculo: {},
     }
   }
 
   async registrarUsuario(values) {
-
+    console.log('registró')
     await API.POST(`/api/usuario`, values)
       .then(() => {
         alert('Registro completado')
@@ -34,7 +35,6 @@ class Register extends Component {
   }
 
   render() {
-    // const { profile } = this.state;
     return (
 
       <Formik initialValues={{
@@ -52,7 +52,7 @@ class Register extends Component {
           marca: '',
           color: '',
           placa: ''
-        }
+        },
 
       }} onSubmit={values => this.registrarUsuario(values)}
         validationSchema={
@@ -247,7 +247,6 @@ class Register extends Component {
                         onBlur={handleBlur('contraseña')}
                         onChangeText={handleChange('contraseña')}
                         values={values.contraseña}
-                      // secureTextEntry={true}
                       />
                       {/* Errores*/}
                       {touched.contraseña && errors.contraseña &&
@@ -256,6 +255,7 @@ class Register extends Component {
                         </Text>
                       }
                     </View>
+
                     <View style={styles.contSelectionRol}>
                       <TitlesTop
                         title='SELECCIÓN DE ROL'
@@ -265,7 +265,7 @@ class Register extends Component {
                       />
                       <Text style={{ padding: 20, fontSize: 20, textAlign: 'center' }}>
                         ¿Serás un Conductor o un Pasajero?
-                                            </Text>
+                      </Text>
 
                       <View style={styles.btnsCont}>
                         <ButtonSelect
@@ -367,17 +367,18 @@ class Register extends Component {
                           <View style={styles.formDataCar}>
                             <Text style={styles.textPasajero}>
                               SELECCIONASTE EL ROL DE PASAJERO, YA TE PUEDES REGISTRAR.
-                                                        </Text>
+                            </Text>
                           </View>
                           : null
                       }
 
                     </View>
 
+                    
                     <View style={styles.contBtns}>
                       <Button
                         title='Registrarse'
-                        bgColor='#FF8C01'
+                        bgColor='#00AA37'
                         colorText='#fff'
                         fontSize={20}
                         onPress={handleSubmit}
@@ -392,7 +393,9 @@ class Register extends Component {
       </Formik>
     )
   }
+
 }
+
 
 const styles = StyleSheet.create({
   containerGen: {
@@ -415,7 +418,6 @@ const styles = StyleSheet.create({
   contSelectionRol: {
     flex: 1,
     width: '100%',
-    // backgroundColor: '#16ade1'
   },
   formDataCar: {
     paddingHorizontal: 24
@@ -439,6 +441,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 16,
   },
+  contFoto: {
+    flex: 1,
+    width: '100%',
+  },
+  img: {
+    width: 120,
+    height: 120,
+    borderRadius: 100,
+    borderColor: '#00AA37',
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    alignSelf: 'center',
+    marginVertical: 20
+  },
+  contBtnFoto: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 })
 
 const mapStateToProps = state => {
