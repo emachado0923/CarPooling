@@ -28,7 +28,7 @@ class ModificarPasajero extends Component {
 
     _ModificarUsuario = () => {
         const id = this.props.user._id
-        API.PUT(`/api/usuario/${id}`, this.state).then((res) => {
+        API.PUT(`/usuario/${id}`, this.state).then((res) => {
             alert('Modificado correctamente')
         }).catch((e) => {
             console.log('error' + e)

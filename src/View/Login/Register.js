@@ -6,35 +6,41 @@ import { Input, Button } from '../../Components/common';
 import { API, URL_API } from '../../API/comunicacionApi';
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { Registro } from '../../redux/actions/configRegister';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { ButtonSelect } from '../../Components/common/ButtonSelect';
 // Formik and yup
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
 
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
+import {SaveFiles} from '../../Components/Files/SaveFiles';
 
 class Register extends Component {
   constructor(props) {
     super(props)
     this.state = {
       vehiculo: {},
+      foto: null
     }
   }
 
   async registrarUsuario(values) {
-    console.log('registró')
-    await API.POST(`/api/usuario`, values)
+    values.foto = await SaveFiles(this.state.foto),
+    console.log('values-->', values)
+    await API.POST(`/usuario`, values)
       .then(() => {
         alert('Registro completado')
       })
-      .catch(() => {
-        console.log('Error')
+      .catch((e) => {
+        console.log('Error-->', e)
       })
-
   }
 
   render() {
+    let { foto } = this.state;
     return (
 
       <Formik initialValues={{
@@ -53,6 +59,7 @@ class Register extends Component {
           color: '',
           placa: ''
         },
+        // foto: this.state.foto
 
       }} onSubmit={values => this.registrarUsuario(values)}
         validationSchema={
@@ -79,6 +86,7 @@ class Register extends Component {
             placa: yup.string().when('profile', {
               is: 'CONDUCTOR', then: yup.string().required('La placa es obligatoria'),
             }),
+            // foto: yup.string().required('Debes poner tu foto'),
 
 
           })}>
@@ -374,7 +382,44 @@ class Register extends Component {
 
                     </View>
 
-                    
+                    <View style={styles.contFoto}>
+                      <TitlesTop
+                        title='SELECCIONA TU FOTO DE PERFIL'
+                        widthSize='80%'
+                        bgColor="#FF8C01"
+                        txtColor='#fff'
+                      />
+                      <View style={styles.img}>
+
+                        {
+                          this.state.foto === null ?
+                            <Icon name='user' color='#707070' size={60} />
+                            :
+                            (
+                              <Image source={{ uri: foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
+                            )
+                        }
+                      </View>
+                      <View style={styles.contBtnFoto}>
+                        <Button title='Seleccionar una foto'
+                          bgColor='#FF8C01'
+                          widthSize='50%'
+                          colorText='#fff'
+                          fontWeight='bold'
+                          fontSize={18}
+                          onPress={this._pickImage}
+                          // onPress={this._pickImage}
+                        />
+                      </View>
+                      <View style={{ alignItems: 'center' }}>
+                        {this.state.foto == null ?
+                          <Text style={{ fontSize: 15, color: 'red' }}>
+                            <Icon name={'exclamation-circle'} size={20} /> {errors.foto}
+                          </Text>
+                          : null
+                        }
+                      </View>
+                    </View>
                     <View style={styles.contBtns}>
                       <Button
                         title='Registrarse'
@@ -393,7 +438,36 @@ class Register extends Component {
       </Formik>
     )
   }
+  componentDidMount() {
+    this.getPermissionAsync();
+  }
 
+  getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
+      }
+    }
+  };
+
+  _pickImage = async () => {
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: false,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        this.setState({ foto: result.uri });
+        console.log('Imagen ingresada--->', result.uri)
+      }
+      return(result.uri)
+    } catch (E) {
+      console.log('error', E);
+    }return(null)
+  };
 }
 
 
