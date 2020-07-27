@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, StyleSheet, Image } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Image, PermissionsAndroid } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { TitlesTop } from '../../Components/titles/titlesTop';
 import { Input, Button } from '../../Components/common';
@@ -12,31 +12,51 @@ import { ButtonSelect } from '../../Components/common/ButtonSelect';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+import ImagePicker from 'react-native-image-picker';
+import RNFetchBlob from 'rn-fetch-blob'
 
-import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
-import {SaveFiles} from '../../Components/Files/SaveFiles';
+
+const options = {
+  title: 'Seleccione la imagen',
+  takePhotoButtonTitle: 'Tomar foto',
+  chooseFromLibraryButtonTitle: "Cambiar imagen",
+  quality: 1
+};
 
 class Register extends Component {
   constructor(props) {
     super(props)
     this.state = {
       vehiculo: {},
-      foto: null
+      foto: null,
+      data: {}
     }
   }
 
   async registrarUsuario(values) {
-    values.foto = await SaveFiles(this.state.foto),
-    console.log('values-->', values)
-    await API.POST(`/usuario`, values)
-      .then(() => {
-        alert('Registro completado')
-      })
-      .catch((e) => {
-        console.log('Error-->', e)
-      })
+    const response = await RNFetchBlob.fetch('POST', URL_API + `/foto`, {
+      Authorization: "Bearer access-token",
+      otherHeader: "foo",
+      'Content-Type': 'multipart/form-data',
+      // body : JSON.stringify(values),
+    },
+      [
+        { name: 'foto', filename: 'image.png', type: 'image/png', data: this.state.data },
+
+      ]);
+    const data = await response.json();
+    console.log('esto es data--->', data)
+    if (data.ok) {
+      values.foto = data.name;
+      console.log('registro -->', values)
+      API.POST(`/usuario`, values)
+        .then(() => {
+          alert('Registro completado')
+        })
+        .catch((e) => {
+          console.log('Error-->', e)
+        })
+    }
   }
 
   render() {
@@ -407,8 +427,8 @@ class Register extends Component {
                           colorText='#fff'
                           fontWeight='bold'
                           fontSize={18}
-                          onPress={this._pickImage}
                           // onPress={this._pickImage}
+                          onPress={this.handleSelectImage.bind(this)}
                         />
                       </View>
                       <View style={{ alignItems: 'center' }}>
@@ -438,36 +458,49 @@ class Register extends Component {
       </Formik>
     )
   }
-  componentDidMount() {
-    this.getPermissionAsync();
+  async componentDidMount() {
+    this.requestCameraRollPermission()
   }
 
-  getPermissionAsync = async () => {
-    if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
-      }
-    }
-  };
-
-  _pickImage = async () => {
+  async requestCameraRollPermission() {
     try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: false,
-        aspect: [4, 3],
-        quality: 1,
-      });
-      if (!result.cancelled) {
-        this.setState({ foto: result.uri });
-        console.log('Imagen ingresada--->', result.uri)
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        {
+          'title': 'Permiso de archivos',
+          'message': 'La aplicación necesita acceso a tus imagenes'
+        }
+      )
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("You can use the camera")
+      } else {
+        console.log("Camera permission denied")
       }
-      return(result.uri)
-    } catch (E) {
-      console.log('error', E);
-    }return(null)
-  };
+    } catch (err) {
+      console.warn(err)
+    }
+  }
+
+  handleSelectImage() {
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('usuario canceló la selección de la imagen');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('Botón personalizado del usuario pulsado: ', response.customButton);
+      } else {
+        this.setState({
+          foto: response.uri,
+          data: response.data
+        })
+      }
+    });
+
+  }
+
 }
 
 
