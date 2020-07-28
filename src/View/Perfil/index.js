@@ -11,13 +11,6 @@ import { TitlesTop } from "../../Components/titles/titlesTop";
 import CardInfo from "../../Components/cards/CardInfo";
 import { Button } from '../../Components/common/Button';
 
-// Image Picker
-import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
-import { API } from "../../API/comunicacionApi";
-
-
 class Perfil extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +19,6 @@ class Perfil extends Component {
             image: null,
         };
     }
-
 
     actualizar_jwt() {
         const token = this.props.delJWT();
@@ -42,36 +34,15 @@ class Perfil extends Component {
         if (this.props.user.profile === 'PASAJERO') {
             this.props.navigation.navigate('ModificarPasajero')
         }
-
-
     }
 
     render() {
-        const id = this.props.user._id;
-        const image = this.props.user.foto;
-        console.log('Imagen del perfil --->', image)
         return (
             <ScrollView style={styles.container}>
                 <Row style={styles.contaSec1}>
                     <Col style={styles.contImg}>
                         <View style={styles.img}>
-
-                            {/* <Image source={image} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} /> */}
-                            {image &&
-
-                                <Image source={image} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
-                            }
-
-                            {/* {
-                                this.props.user.foto === null || this.props.user.foto === "" && this.state.image === null ?
-                                    <Button title='Seleccionar una foto' bgColor='transparent' widthSize='90%'
-                                        colorText='#707070' fontSize={16} onPress={this._pickImage} />
-                                    : (
-                                        <Image style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
-                                            source={{ uri: `http://192.168.1.2:3000/${this.props.user.foto}` }} />
-                                    )
-                            } */}
-
+                            <Image source={{ uri: 'http://192.168.1.1:3000/uploads/' + this.props.user.foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
                         </View>
                         <Text style={styles.txt}>{this.props.user.nombre} {this.props.user.apellido}</Text>
                     </Col>
@@ -196,39 +167,6 @@ class Perfil extends Component {
             </ScrollView>
         );
     }
-
-    // componentDidMount() {
-    //     this.getPermissionAsync();
-    // }
-
-    // getPermissionAsync = async () => {
-    //     if (Constants.platform.ios) {
-    //         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    //         if (status !== 'granted') {
-    //             alert('Sorry, we need camera roll permissions to make this work!');
-    //         }
-    //     }
-    // };
-
-    // _pickImage = async () => {
-    //     try {
-    //         let result = await ImagePicker.launchImageLibraryAsync({
-    //             mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    //             allowsEditing: false,
-    //             aspect: [4, 3],
-    //             quality: 1,
-    //         });
-    //         if (!result.cancelled) {
-    //             this.setState({ image: result.uri });
-
-    //             console.log(this.state.image)
-
-    //         }
-
-    //     } catch (E) {
-    //         console.log('error', E);
-    //     }
-    // };
 }
 
 const styles = StyleSheet.create({
