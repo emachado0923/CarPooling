@@ -78,9 +78,7 @@ class Register extends Component {
           marca: '',
           color: '',
           placa: ''
-        },
-        // foto: this.state.foto
-
+        }
       }} onSubmit={values => this.registrarUsuario(values)}
         validationSchema={
           yup.object().shape({
@@ -97,7 +95,7 @@ class Register extends Component {
             profile: yup.string().required('Selecciona un rol'),
 
             marca: yup.string().when('profile', {
-              is: 'CONDUCTOR', then: yup.string().required('La marca es obligatoria')
+              is: 'CONDUCTOR', then: yup.string().required('La marca es obligatoria'),
             }),
             color: yup.string().when('profile', {
               is: 'CONDUCTOR', then: yup.string().required('El color es obligatorio'),
@@ -352,7 +350,7 @@ class Register extends Component {
                             values={values.vehiculo.marca}
 
                           />
-                          {touched.vehiculo.marca && errors.marca &&
+                          {touched.vehiculo && errors.marca &&
                             <Text style={{ fontSize: 15, color: 'red' }}>
                               <Icon name={'exclamation-circle'} size={20} /> {errors.marca}
                             </Text>
@@ -368,7 +366,7 @@ class Register extends Component {
                             onChangeText={handleChange('color')}
                             values={values.vehiculo.color}
                           />
-                          {touched.vehiculo.color && errors.color &&
+                          {touched.vehiculo && errors.color &&
                             <Text style={{ fontSize: 15, color: 'red' }}>
                               <Icon name={'exclamation-circle'} size={20} /> {errors.color}
                             </Text>
@@ -384,7 +382,7 @@ class Register extends Component {
                             onChangeText={handleChange('placa')}
                             values={values.vehiculo.placa}
                           />
-                          {touched.vehiculo.placa && errors.placa &&
+                          {touched.vehiculo && errors.placa &&
                             <Text style={{ fontSize: 15, color: 'red' }}>
                               <Icon name={'exclamation-circle'} size={20} /> {errors.placa}
                             </Text>

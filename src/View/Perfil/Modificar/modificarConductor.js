@@ -22,8 +22,6 @@ class ModificarConductor extends Component {
             dirección: this.props.user.dirección,
             centro: this.props.user.centro,
             pass: this.props.user.contraseña,
-
-
             marca: this.props.user.vehiculo.marca,
             color: this.props.user.vehiculo.color,
             placa: this.props.user.vehiculo.placa,
@@ -140,20 +138,48 @@ class ModificarConductor extends Component {
                 </Col>
 
 
-                <Col style={{ alignItems: 'center', marginVertical: 12 }}>
-                    <Button title='Guardar' borderWidth={2}
-                        bgColor='#00AA37' fontSize={20}
-                        colorText='#fff' fontWeight='bold'
-                        onPress={this._ModificarUsuario}
-                    />
-                    <Button
-                        title='Volver'
-                        bgColor='#FF8C01'
-                        colorText='#FFF'
-                        fontSize={20}
-                        fontWeight='bold'
-                        onPress={() => this.props.navigation.navigate('Perfil')} />
-                </Col>
+                <View style={styles.contImg}>
+                    <View style={styles.img}>
+                        <Image source={{ uri: 'http://192.168.1.1:3000/uploads/' + this.props.user.foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
+                    </View>
+                    <View style={{ width: '40%' }}>
+                        <Button
+                            title='Cambiar foto'
+                            borderColor='#00AA37'
+                            borderWidth={2}
+                            widthSize='100%'
+                            fontSize={20}
+                            bgColor='transparent'
+                            colorText='#707070'
+                            fontWeight='bold'
+                        />
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginVertical: 12 }}>
+                    <View style={{ width: '40%' }}>
+                        <Button
+                            title='Guardar'
+                            borderWidth={2}
+                            bgColor='#00AA37'
+                            fontSize={20}
+                            colorText='#fff'
+                            fontWeight='bold'
+                            widthSize='100%'
+                            onPress={this._ModificarUsuario}
+                        />
+                    </View>
+                    <View style={{ width: '40%' }}>
+                        <Button
+                            title='Cancelar'
+                            bgColor='#FF8C01'
+                            colorText='#FFF'
+                            fontSize={20}
+                            fontWeight='bold'
+                            widthSize='100%'
+                            onPress={() => this.props.navigation.navigate('Perfil')}
+                        />
+                    </View>
+                </View>
 
             </ScrollView>
         )
@@ -168,15 +194,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#E0E0E0',
     },
     contImg: {
-        width: '40%',
-        justifyContent: 'center',
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        padding: 8,
-        textAlign: 'center'
+        marginVertical: 12
     },
     img: {
-        width: 120,
-        height: 120,
+        width: 150,
+        height: 150,
         borderRadius: 100,
         borderColor: '#00AA37',
         borderWidth: 2,
