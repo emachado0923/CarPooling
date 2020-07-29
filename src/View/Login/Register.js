@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, StyleSheet, Image, PermissionsAndroid } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Image, PermissionsAndroid, Alert } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { TitlesTop } from '../../Components/titles/titlesTop';
 import { Input, Button } from '../../Components/common';
@@ -45,13 +45,18 @@ class Register extends Component {
 
       ]);
     const data = await response.json();
-    console.log('esto es data--->', data)
     if (data.ok) {
       values.foto = data.name;
-      console.log('registro -->', values)
       API.POST(`/usuario`, values)
         .then(() => {
-          alert('Registro completado')
+          Alert.alert(
+            "RESGISTRO",
+            "El registro se completó con éxito",
+            [
+              { text: "OK", onPress: () => this.props.navigation.navigate('Auth'),}
+            ],
+            { cancelable: false }
+          );
         })
         .catch((e) => {
           console.log('Error-->', e)
@@ -273,6 +278,7 @@ class Register extends Component {
                         onBlur={handleBlur('contraseña')}
                         onChangeText={handleChange('contraseña')}
                         values={values.contraseña}
+                      secureTextEntry={true}
                       />
                       {/* Errores*/}
                       {touched.contraseña && errors.contraseña &&
@@ -425,7 +431,6 @@ class Register extends Component {
                           colorText='#fff'
                           fontWeight='bold'
                           fontSize={18}
-                          // onPress={this._pickImage}
                           onPress={this.handleSelectImage.bind(this)}
                         />
                       </View>
@@ -481,8 +486,6 @@ class Register extends Component {
 
   handleSelectImage() {
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-
       if (response.didCancel) {
         console.log('usuario canceló la selección de la imagen');
       } else if (response.error) {
