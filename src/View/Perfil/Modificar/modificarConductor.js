@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput } from "react-native";
+import { View, Text, StyleSheet, Image, Alert } from "react-native";
 import { connect } from "react-redux";
 import { TitlesTop } from "../../../Components/titles/titlesTop";
 import { ScrollView } from "react-native-gesture-handler";
@@ -14,7 +14,6 @@ class ModificarConductor extends Component {
         this.state = {
             estado: true,
             image: null,
-
             nombre: this.props.user.nombre,
             apellido: this.props.user.apellido,
             celular: this.props.user.celular,
@@ -31,8 +30,15 @@ class ModificarConductor extends Component {
 
     _ModificarUsuario = async () => {
         const id = this.props.user._id
-        API.PUT(`/usuario/${id}`, this.state).then((res) => {
-            alert('Modificado correctamente')
+        API.PUT(`/conductor/${id}`, this.state).then((res) => {
+            Alert.alert(
+                "ESTADO DE EDICIÓN",
+                "El usuario se editó con éxito",
+                [
+                    { text: "OK", onPress: () => this.props.navigation.navigate('Perfil'), }
+                ],
+                { cancelable: false }
+            );
         }).catch((e) => {
             console.log('error' + e)
         })
@@ -96,13 +102,6 @@ class ModificarConductor extends Component {
                         labelColor='#FF8C01'
                         editable={true}
                         onChangeText={(centro) => this.setState({ centro })}
-                    />
-                    <Input
-                        label='Contraseña'
-                        editable={true}
-                        labelSize={20}
-                        labelColor='#FF8C01'
-                        onChangeText={(pass) => this.setState({ pass })}
                     />
                 </Col>
                 <TitlesTop

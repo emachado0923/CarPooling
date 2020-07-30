@@ -1,41 +1,56 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput } from "react-native";
+import { View, StyleSheet, Image, PermissionsAndroid, Alert } from "react-native";
 import { connect } from "react-redux";
 import { TitlesTop } from "../../../Components/titles/titlesTop";
 import { ScrollView } from "react-native-gesture-handler";
 import { Col } from "react-native-easy-grid";
 import { Button, Input } from "../../../Components/common";
-import Axios from "axios";
 import { API } from "../../../API/comunicacionApi";
+
+import ImagePicker from 'react-native-image-picker';
+import RNFetchBlob from 'rn-fetch-blob';
+
+//Opciones para seleccionar foto
+const options = {
+    title: 'Seleccionar foto de perfil',
+    takePhotoButtonTitle: 'Tomar foto',
+    chooseFromLibraryButtonTitle: 'Seleccionar de la galaría',
+    quality: 1
+};
 
 class ModificarPasajero extends Component {
     constructor(props) {
         super(props);
         this.state = {
             estado: true,
-            image: null,
+            foto: null,
             nombre: this.props.user.nombre,
             apellido: this.props.user.apellido,
             celular: this.props.user.celular,
             correo: this.props.user.correo,
             dirección: this.props.user.dirección,
             centro: this.props.user.centro,
-            pass: this.props.user.contraseña,
-
         }
     }
 
     _ModificarUsuario = () => {
         const id = this.props.user._id
-        API.PUT(`/usuario/${id}`, this.state).then((res) => {
-            alert('Modificado correctamente')
+        API.PUT(`/pasajero/${id}`, this.state).then((res) => {
+            Alert.alert(
+                "ESTADO DE EDICIÓN",
+                "El usuario se editó con éxito",
+                [
+                    { text: "OK", onPress: () => this.props.navigation.navigate('Perfil'), }
+                ],
+                { cancelable: false }
+            );
         }).catch((e) => {
             console.log('error' + e)
         })
     }
 
     render() {
-
+        let { foto } = this.state;
         return (
             <ScrollView>
                 <TitlesTop
@@ -93,13 +108,6 @@ class ModificarPasajero extends Component {
                         editable={true}
                         onChangeText={(centro) => this.setState({ centro })}
                     />
-                    <Input
-                        label='Contraseña'
-                        editable={true}
-                        labelSize={20}
-                        labelColor='#FF8C01'
-                        onChangeText={(pass) => this.setState({ pass })}
-                    />
                 </Col>
                 <View style={styles.contImg}>
                     <View style={styles.img}>
@@ -115,6 +123,7 @@ class ModificarPasajero extends Component {
                             bgColor='transparent'
                             colorText='#707070'
                             fontWeight='bold'
+                            onPress={this.handleSelectImage.bind(this)}
                         />
                     </View>
                 </View>
@@ -146,6 +155,47 @@ class ModificarPasajero extends Component {
             </ScrollView>
 
         )
+    }
+
+    async componentDidMount() {
+        this.requestCameraRollPermission()
+    }
+
+    async requestCameraRollPermission() {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+                {
+                    'title': 'Permiso de archivos',
+                    'message': 'La aplicación necesita acceso a tus imagenes'
+                }
+            )
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log("You can use the camera")
+            } else {
+                console.log("Camera permission denied")
+            }
+        } catch (err) {
+            console.warn(err)
+        }
+    }
+
+    handleSelectImage() {
+        ImagePicker.showImagePicker(options, (response) => {
+            if (response.didCancel) {
+                console.log('usuario canceló la selección de la imagen');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('Botón personalizado del usuario pulsado: ', response.customButton);
+            } else {
+                this.setState({
+                    foto: response.uri,
+                    data: response.data
+                })
+            }
+        });
+
     }
 
 }

@@ -17,9 +17,9 @@ import RNFetchBlob from 'rn-fetch-blob'
 
 
 const options = {
-  title: 'Seleccione la imagen',
+  title: 'Seleccionar foto de perfil',
   takePhotoButtonTitle: 'Tomar foto',
-  chooseFromLibraryButtonTitle: "Cambiar imagen",
+  chooseFromLibraryButtonTitle: 'Seleccionar de la galaría',
   quality: 1
 };
 
