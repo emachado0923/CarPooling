@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { connect } from "react-redux";
 import { deleteJWT } from "../../redux/actions/services";
-import { Grid, Row, Col } from "react-native-easy-grid";
+import { Row, Col } from "react-native-easy-grid";
 
 // Componentes
 import { ButtonMenu } from "../../Components/common/ButtonMenu";
@@ -42,13 +42,14 @@ class Perfil extends Component {
                 <Row style={styles.contaSec1}>
                     <Col style={styles.contImg}>
                         <View style={styles.img}>
-                            <Image source={{ uri: 'http://192.168.1.1:3000/uploads/' + this.props.user.foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
+                            <Image source={{ uri: 'http://192.168.1.3:3000/uploads/' + this.props.user.foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
                         </View>
-                        <Text style={styles.txt}>{this.props.user.nombre} {this.props.user.apellido}</Text>
+                        <Text style={{ fontSize: 20, textAlign: 'center' }}>
+                            {this.props.user.nombre} {this.props.user.apellido}
+                        </Text>
                     </Col>
                     <Col style={styles.contPrincipalInfo}>
                         <Text style={styles.txt}>{this.props.user.profile}</Text>
-
                         <Text style={styles.txt}>2029 puntos</Text>
                         <ButtonMenu
                             onPress={this.actualizar_jwt.bind(this)}

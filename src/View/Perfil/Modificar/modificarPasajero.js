@@ -5,12 +5,11 @@ import { TitlesTop } from "../../../Components/titles/titlesTop";
 import { ScrollView } from "react-native-gesture-handler";
 import { Col } from "react-native-easy-grid";
 import { Button, Input } from "../../../Components/common";
-import { API } from "../../../API/comunicacionApi";
+import { API, URL_API } from "../../../API/comunicacionApi";
 
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'rn-fetch-blob';
 
-//Opciones para seleccionar foto
 const options = {
     title: 'Seleccionar foto de perfil',
     takePhotoButtonTitle: 'Tomar foto',
@@ -33,20 +32,34 @@ class ModificarPasajero extends Component {
         }
     }
 
-    _ModificarUsuario = () => {
+    _ModificarUsuario = async () => {
         const id = this.props.user._id
-        API.PUT(`/pasajero/${id}`, this.state).then((res) => {
-            Alert.alert(
-                "ESTADO DE EDICIÓN",
-                "El usuario se editó con éxito",
-                [
-                    { text: "OK", onPress: () => this.props.navigation.navigate('Perfil'), }
-                ],
-                { cancelable: false }
-            );
-        }).catch((e) => {
-            console.log('error' + e)
-        })
+        const response = await RNFetchBlob.fetch('PUT', URL_API + `/foto/${id}`, {
+            Authorization: "Bearer access-token",
+            otherHeader: "foo",
+            'Content-Type': 'multipart/form-data',
+            // body : JSON.stringify(values),
+        },
+            [
+                { name: 'foto', filename: 'image.png', type: 'image/png', data: this.state.data },
+
+            ]);
+        const data = await response.json();
+        if (data.ok) {
+            this.state.foto = data.name;
+            API.PUT(`/pasajero/${id}`, this.state).then((res) => {
+                Alert.alert(
+                    "ESTADO DE EDICIÓN",
+                    "El usuario se editó con éxito",
+                    [
+                        { text: "OK", onPress: () => this.props.navigation.navigate('Perfil'), }
+                    ],
+                    { cancelable: false }
+                );
+            }).catch((e) => {
+                console.log('error' + e)
+            })
+        }
     }
 
     render() {
@@ -111,7 +124,7 @@ class ModificarPasajero extends Component {
                 </Col>
                 <View style={styles.contImg}>
                     <View style={styles.img}>
-                        <Image source={{ uri: 'http://192.168.1.1:3000/uploads/' + this.props.user.foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
+                        <Image source={{ uri: foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
                     </View>
                     <View style={{ width: '40%' }}>
                         <Button
