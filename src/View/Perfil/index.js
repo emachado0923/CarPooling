@@ -42,7 +42,7 @@ class Perfil extends Component {
                 <Row style={styles.contaSec1}>
                     <Col style={styles.contImg}>
                         <View style={styles.img}>
-                            <Image source={{ uri: 'http://192.168.1.3:3000/uploads/' + this.props.user.foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
+                            <Image source={{ uri: 'http://192.168.1.5:3000/uploads/' + this.props.user.foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
                         </View>
                         <Text style={{ fontSize: 20, textAlign: 'center' }}>
                             {this.props.user.nombre} {this.props.user.apellido}

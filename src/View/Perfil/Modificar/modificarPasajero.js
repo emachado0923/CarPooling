@@ -33,33 +33,34 @@ class ModificarPasajero extends Component {
     }
 
     _ModificarUsuario = async () => {
-        const id = this.props.user._id
-        const response = await RNFetchBlob.fetch('PUT', URL_API + `/foto/${id}`, {
-            Authorization: "Bearer access-token",
-            otherHeader: "foo",
-            'Content-Type': 'multipart/form-data',
-            // body : JSON.stringify(values),
-        },
-            [
-                { name: 'foto', filename: 'image.png', type: 'image/png', data: this.state.data },
-
-            ]);
-        const data = await response.json();
-        if (data.ok) {
-            this.state.foto = data.name;
-            API.PUT(`/pasajero/${id}`, this.state).then((res) => {
-                Alert.alert(
-                    "ESTADO DE EDICIÓN",
-                    "El usuario se editó con éxito",
-                    [
-                        { text: "OK", onPress: () => this.props.navigation.navigate('Perfil'), }
-                    ],
-                    { cancelable: false }
-                );
-            }).catch((e) => {
-                console.log('error' + e)
-            })
-        }
+            const id = this.props.user._id
+            const response = await RNFetchBlob.fetch('PUT', URL_API + `/foto/${id}`, {
+                Authorization: "Bearer access-token",
+                otherHeader: "foo",
+                'Content-Type': 'multipart/form-data',
+                // body : JSON.stringify(values),
+            },
+                [
+                    { name: 'foto', filename: 'image.png', type: 'image/png', data: this.state.data },
+    
+                ]);
+            const data = await response.json();
+            if (data.ok) {
+                this.state.foto = data.name;
+                API.PUT(`/pasajero/${id}`, this.state).then((res) => {
+                    Alert.alert(
+                        "ESTADO DE EDICIÓN",
+                        "El usuario se editó con éxito",
+                        [
+                            { text: "OK", onPress: () => this.props.navigation.navigate('Perfil'), }
+                        ],
+                        { cancelable: false }
+                    );
+                }).catch((e) => {
+                    console.log('error' + e)
+                })
+            }
+        
     }
 
     render() {
@@ -124,7 +125,7 @@ class ModificarPasajero extends Component {
                 </Col>
                 <View style={styles.contImg}>
                     <View style={styles.img}>
-                        <Image source={{ uri: foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
+                        <Image source={{ uri:  foto}} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
                     </View>
                     <View style={{ width: '40%' }}>
                         <Button
@@ -151,6 +152,8 @@ class ModificarPasajero extends Component {
                             fontWeight='bold'
                             widthSize='100%'
                             onPress={this._ModificarUsuario}
+        
+
                         />
                     </View>
                     <View style={{ width: '40%' }}>
