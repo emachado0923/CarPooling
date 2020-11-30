@@ -1,31 +1,33 @@
-import React, { Component } from "react";
-import { View, Text, Picker, StyleSheet } from "react-native";
+import React, {Component} from "react";
+import {View, Text, Picker, StyleSheet} from "react-native";
 // Responsive
-import { Row } from "react-native-easy-grid";
+import {Row} from "react-native-easy-grid";
 
-const Select = ({ borderColor, title, colorText, fontSize }) => {
-  return (
-    <View style={{ marginVertical: 12, }}>
-      <Text style={{
-        color: colorText || "#000",
-        fontWeight: 'bold',
-        fontSize: fontSize || 20
-      }}>{title}</Text>
-      <Row style={{
-        height: 'auto',
-        borderBottomWidth: 2,
-        borderColor: borderColor || '#000',
-      }}>
+const Select = ({borderColor, title, colorText, fontSize, value, label, array}) => {
+    return (
+        <View style={{marginVertical: 2,padding:5}}>
+            <Text style={{
+                color: colorText || "#000",
+                fontWeight: 'bold',
+                fontSize: fontSize || 12
+            }}>{title}</Text>
+            <Row style={{
+                height: 45,
+                borderWidth: 2,
+                borderColor: borderColor || '#000',
+                borderRadius:10,
+            }}>
 
-        <Picker
-          mode='dropdown'
-          style={{ width: '100%'}}>
-          <Picker.Item label='Algo' value='a' />
-          <Picker.Item label='Prueba' value='a' />
-        </Picker>
-      </Row>
-    </View>
-  )
+                <Picker mode='dropdown' style={{width: '100%'}}>
+
+                    {array.map(item => {
+                        <Picker.item label={label} value={item + '.' + value}/>
+                    })}
+
+                </Picker>
+            </Row>
+        </View>
+    )
 }
 
 export default (Select)

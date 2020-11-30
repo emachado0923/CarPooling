@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
-import { connect } from "react-redux";
-import { deleteJWT } from "../../redux/actions/services";
-import { Row, Col } from "react-native-easy-grid";
+import React, {Component} from "react";
+import {View, Text, StyleSheet, Image} from "react-native";
+import {connect} from "react-redux";
+import {deleteJWT} from "../../redux/actions/services";
+import {Row, Col} from "react-native-easy-grid";
 
 // Componentes
-import { ButtonMenu } from "../../Components/common/ButtonMenu";
-import { ScrollView } from "react-native-gesture-handler";
-import { TitlesTop } from "../../Components/titles/titlesTop";
+import {ButtonMenu} from "../../Components/common/ButtonMenu";
+import {ScrollView} from "react-native-gesture-handler";
+import {TitlesTop} from "../../Components/titles/titlesTop";
 import CardInfo from "../../Components/cards/CardInfo";
-import { Button } from '../../Components/common/Button';
+import {Button} from '../../Components/common/Button';
 
 class Perfil extends Component {
     constructor(props) {
@@ -21,10 +21,15 @@ class Perfil extends Component {
     }
 
     actualizar_jwt() {
-        const token = this.props.delJWT();
-        if (token) {
-            this.props.navigation.navigate('Auth')
-        }
+
+
+        this.props.delJWT()
+        console.log(this.props.jwt)
+        return this.props.navigation.reset({
+            index: 0,
+            routes: [{name: 'Auth'}]
+        })
+        console.log(this.props.user.rol[0].nombre)
     }
 
     modificarPerfil = () => {
@@ -37,14 +42,16 @@ class Perfil extends Component {
     }
 
     render() {
+        const rol = this.props.user.rol[0].nombre
         return (
             <ScrollView style={styles.container}>
                 <Row style={styles.contaSec1}>
                     <Col style={styles.contImg}>
                         <View style={styles.img}>
-                            <Image source={{ uri: 'http://192.168.1.5:3000/uploads/' + this.props.user.foto }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
+                            <Image source={{uri: 'http://192.168.1.55:3000/uploads/' + this.props.user.foto}}
+                                   style={{width: '100%', height: '100%', resizeMode: 'cover'}}/>
                         </View>
-                        <Text style={{ fontSize: 20, textAlign: 'center' }}>
+                        <Text style={{fontSize: 20, textAlign: 'center'}}>
                             {this.props.user.nombre} {this.props.user.apellido}
                         </Text>
                     </Col>
@@ -111,7 +118,7 @@ class Perfil extends Component {
                         iconColor='#5a5a5a'
                         title='Centro de formación'
                         colorTitle='#FF8C01'
-                        info={this.props.user.centro}
+                        info={this.props.user.centro[0].nombreCentro}
                     />
                 </Col>
                 {
@@ -155,15 +162,40 @@ class Perfil extends Component {
                         </View>
                     ) : null
                 }
-                <Col style={{ alignItems: 'center', marginVertical: 20 }}>
-                    <Button
-                        title='Editar'
-                        bgColor='#00AA37'
-                        fontSize={20}
-                        colorText='#FFF'
-                        fontWeight='bold'
-                        onPress={this.modificarPerfil}
-                    />
+                <Col style={{alignItems: 'center', marginVertical: 20}}>
+
+                    {rol === 'Administrador' ? (
+                        <View style={{flexDirection: 'row', left: 10}}>
+                            <Button
+                                title='Editar'
+                                bgColor='#00AA37'
+                                fontSize={16}
+                                colorText='#FFF'
+                                fontWeight='bold'
+                                onPress={this.modificarPerfil}
+                            />
+                            <Button
+                                title='Administración'
+                                bgColor='#00AA37'
+                                fontSize={16}
+                                colorText='#FFF'
+                                fontWeight='bold'
+                                onPress={() => this.props.navigation.navigate("Administrador")}
+                                widthSize={140}
+                            />
+
+                        </View>
+
+                    ) : (
+                        <Button
+                            title='Editar'
+                            bgColor='#00AA37'
+                            fontSize={16}
+                            colorText='#FFF'
+                            fontWeight='bold'
+                            onPress={this.modificarPerfil}
+                        />
+                    )}
                 </Col>
             </ScrollView>
         );

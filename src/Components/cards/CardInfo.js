@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import React, {Component} from "react";
+import {View, Text, StyleSheet, TouchableHighlight} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Col } from "react-native-easy-grid";
+import {Col} from "react-native-easy-grid";
 
-const CardInfo = ({ containerSize, bgColor, containerBorder, onPress, size, iconName, iconSize, iconColor, title, colorTitle, sizeTitle, info, colorInfo, sizeInfo }) => {
+const CardInfo = ({containerSize, bgColor, containerBorder, onPress, size, iconName, iconSize, iconColor, title, colorTitle, sizeTitle, info, colorInfo, sizeInfo, key}) => {
     return (
         <TouchableHighlight onPress={onPress} underlayColor="rgba(0,0,0,0.1)">
             <View style={{
@@ -11,22 +11,24 @@ const CardInfo = ({ containerSize, bgColor, containerBorder, onPress, size, icon
                 borderRadius: 12,
                 borderColor: containerBorder || 'transparent',
                 borderWidth: 1,
-                padding: 8,
+                padding: 10,
                 backgroundColor: bgColor || '#E0E0E0',
-                marginVertical: 4,
+                marginVertical: 5,
                 flexDirection: 'row',
-                alignItems: 'center'
-            }}>
+                alignItems: 'center',
+                position: 'relative',
+            }} key={key}>
+
                 <Col style={{
                     width: size || 120,
                     height: size || 120,
                     borderRadius: 100,
-                    borderColor: colorTitle ||'#000',
+                    borderColor: colorTitle || '#000',
                     borderWidth: 1,
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    <Icon name={iconName} size={iconSize || 16} color={iconColor} />
+                    <Icon name={iconName} size={iconSize || 16} color={iconColor}/>
                 </Col>
                 <Col style={{
                     padding: 8,

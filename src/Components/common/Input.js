@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TextInput, Text } from 'react-native';
 
-export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, numberOfLines, editable, borderBottomColor, fontInputSize, labelColor, labelSize, labelWeight }) => {
+export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, numberOfLines, editable, keyboardType,borderBottomColor, fontInputSize, labelColor, labelSize, labelWeight }) => {
   let inputStyle = {
     minWidth: '100%',
     borderBottomWidth: 2,
@@ -19,7 +19,8 @@ export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry
     margin: 0,
     padding: 2,
     fontSize: labelSize || 16,
-    fontWeight: labelWeight || 'bold'
+    fontWeight: labelWeight || 'bold',
+    fontFamily: 'ravie',
   }
   return (
     <View style={{
@@ -37,6 +38,7 @@ export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry
         numberOfLines={numberOfLines}
         style={inputStyle}
         editable={editable}
+        keyboardType={keyboardType}
       />
     </View>
   );

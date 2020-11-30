@@ -10,6 +10,7 @@
     "dependencies": {
         "@react-native-community/async-storage": "^1.9.0",
         "@react-native-community/masked-view": "^0.1.10",
+        "@react-native-mapbox-gl/maps": "^8.1.0-rc.4",
         "@react-navigation/bottom-tabs": "^5.5.1",
         "@react-navigation/material-top-tabs": "^5.2.12",
         "@react-navigation/native": "^5.5.0",
@@ -21,6 +22,7 @@
         "formik": "^2.1.4",
         "link": "^0.1.5",
         "lottie-react-native": "^3.3.2",
+        "moment": "^2.29.1",
         "react": "~16.9.0",
         "react-devtools": "^4.6.0",
         "react-dom": "~16.9.0",
@@ -32,6 +34,7 @@
         "react-native-reanimated": "~1.7.0",
         "react-native-safe-area-context": "^0.7.3",
         "react-native-screens": "~2.2.0",
+        "react-native-swipe-list-view": "^3.2.3",
         "react-native-tab-view": "^2.14.4",
         "react-native-unimodules": "~0.9.0",
         "react-native-vector-icons": "^6.6.0",
@@ -44,6 +47,7 @@
         "redux-thunk": "^2.3.0",
         "remote-redux-devtools": "^0.5.16",
         "rn-fetch-blob": "^0.12.0",
+        "socket.io-client": "^2.3.0",
         "styled-components": "^5.1.0",
         "yup": "^0.29.1"
     },

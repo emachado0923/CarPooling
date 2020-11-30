@@ -18,7 +18,8 @@ export default class Titles extends Component {
                 color: this.props.colorText,
                 textAlign: "center",
                 textTransform: "uppercase",
-                marginBottom: 10
+                marginBottom: 10,
+                fontFamily: 'vincHand',
             }
         }
     }
